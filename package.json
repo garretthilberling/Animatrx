@@ -1,0 +1,29 @@
+{
+  "name": "youranimelist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garretthilberling/YourAnimeList.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/garretthilberling/YourAnimeList/issues"
+  },
+  "homepage": "https://github.com/garretthilberling/YourAnimeList#readme",
+  "dependencies": {
+    "concurrently": "^7.3.0",
+    "node": "^18.7.0",
+    "nodemon": "^2.0.19"
+  }
+}
