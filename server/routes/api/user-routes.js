@@ -10,3 +10,5 @@ router.route("/signup").post(addUser);
 router.route("/login").post(login);
 
 router.route("/:id").get(getUserProfile);
+
+module.exports = router;
