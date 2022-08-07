@@ -21,7 +21,7 @@ const UserSchema = new Schema(
       minlength: 5,
     },
     saved: [{ type: Schema.Types.ObjectId, ref: "Anime" }],
-    review: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   },
   {
     toJSON: {
