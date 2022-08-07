@@ -32,7 +32,7 @@ const userController = {
       })
       .catch((err) => res.json(err));
   },
-  // // profile
+  // profile
   getUserProfile({ params }, res) {
     User.findOne({ _id: params.id })
       .populate({
@@ -50,6 +50,7 @@ const userController = {
         res.sendStatus(400);
       });
   },
+  // all users
   getAllUsers(req, res) {
     User.find({})
     .populate({

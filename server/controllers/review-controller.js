@@ -1,4 +1,5 @@
 const { Review, User } = require("../models");
+var mongoose = require('mongoose');
 
 const reviewController = {
   getReview({ params }, res) {
@@ -47,8 +48,14 @@ const reviewController = {
       });
   },
 
-  addReview({ params, body, userId }, res) {
-    Review.create(params.animeId, body, userId)
+  addReview(req, res) {
+    Review.create({
+      userId: req.body.userId,
+      animeId: req.params.animeId,
+      title: req.body.title,
+      body: req.body.body,
+      rating: req.body.rating
+    })
     .then(review => res.json(review))
     .catch(err => res.json(err));
   },

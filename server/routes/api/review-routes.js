@@ -9,11 +9,11 @@ const {
     downvote
 } = require("../../controllers/review-controller");
 
-router.route("/reviews")
+router.route("/:animeId/reviews")
 .get(getReviews)
 .post(addReview);
 
-router.route("/reviews/:id")
+router.route("/:animeId/reviews/:id")
 .get(getReview)
 .put(updateReview)
 .delete(removeReview)

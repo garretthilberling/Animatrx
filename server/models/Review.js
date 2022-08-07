@@ -6,7 +6,7 @@ const ReviewSchema = new Schema({
     required: true,
   },
   animeId: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true,
   },
   title: {
