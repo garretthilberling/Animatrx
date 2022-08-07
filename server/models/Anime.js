@@ -22,6 +22,20 @@ const animeSchema = new Schema({
   image: {
     type: String,
   },
+  reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }]
+},
+{
+  toJSON: {
+    virtuals: true,
+  },
+  // prevents virtuals from creating duplicate of _id as `id`
+  id: false,
 });
+
+// animeSchema.virtual('averageRating').get(function() {
+//   let sum;
+//   this.reviews.map(review => sum += review.rating);
+//   return sum / this.reviews.length;
+// });
 
 module.exports = animeSchema;

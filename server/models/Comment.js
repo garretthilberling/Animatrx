@@ -15,7 +15,7 @@ const CommentSchema = new Schema({
   },
   upvotes: [{ type: Schema.Types.ObjectId, ref: "User" }],
   downvotes: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  replies: [{ type: Schema.Types.ObjectId, ref: "Reply" }],
+  replies: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 const Comment = model("Comment", CommentSchema);

@@ -7,7 +7,7 @@ const userController = {
         User.create(req)
         .then(user => {
             const token = signToken(user);
-            res.json(user, token)
+            res.json(user, { token: token })
         })
         .catch(err => res.json(err));
     },
@@ -26,7 +26,7 @@ const userController = {
     
             const token = signToken(user);
 
-            res.json(user, token);
+            res.json(user, { token: token });
         })
         .catch(err => res.json(err));
     },
