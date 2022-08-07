@@ -11,6 +11,19 @@ const {
     removeReply,
 } = require("../../controllers/comment-controller");
 
-router.route()
+router
+.route('/comments')
+.get(getComments)
+.post(addComment)
+
+router
+.route('/comments/:commentId')
+.get(getComment)
+.put(updateComment)
+.delete(removeComment)
+.post(upvote)
+.post(downvote)
+.post(addReply)
+.delete(removeReply);
 
 module.exports = router;

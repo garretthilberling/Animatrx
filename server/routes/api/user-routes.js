@@ -3,12 +3,15 @@ const {
   addUser,
   login,
   getUserProfile,
+  getAllUsers
 } = require("../../controllers/user-controller");
 
 router.route("/signup").post(addUser);
 
 router.route("/login").post(login);
 
-router.route("/:id").get(getUserProfile);
+router.route("/user/:id").get(getUserProfile);
+
+router.route("/users").get(getAllUsers);
 
 module.exports = router;

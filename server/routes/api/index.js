@@ -4,7 +4,6 @@ const commentRoutes = require('./comment-routes');
 const userRoutes = require('./user-routes');
 
 router.use('/:animeId', reviewRoutes, commentRoutes);
-
-router.use('/profile/:userId', userRoutes);
+router.use('/', userRoutes);
 
 module.exports = router;

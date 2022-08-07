@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const bcrypt = require('bcrypt');
 
 const UserSchema = new Schema(
   {
@@ -20,7 +21,7 @@ const UserSchema = new Schema(
       required: true,
       minlength: 5,
     },
-    saved: [{ type: Schema.Types.ObjectId, ref: "Anime" }],
+    savedAnime: [{ type: String }],
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   },
   {

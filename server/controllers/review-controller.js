@@ -60,8 +60,8 @@ const reviewController = {
   },
 
   removeReview({params}, res) {
-    const rmReview = await Review.findOneAndDelete({ _id: params.reviewId});
-    const updateUser = await User.findOneAndUpdate(
+    const rmReview = Review.findOneAndDelete({ _id: params.reviewId});
+    const updateUser = User.findOneAndUpdate(
         { _id: params.userId},
         { $pull: { reviews: params.reviewId } },
         { new: true }
@@ -78,16 +78,16 @@ const reviewController = {
   },
 
   upvote({ params, userId }, res) {
-    const upvote = await Review.findOneAndUpdate(
+    const upvote = Review.findOneAndUpdate(
         { _id: params.reviewId },
         { $push: { upvotes: userId } },
         { new: true },
     );
 
-    const checkDownvote = await Review.findOne({ _id: params.reviewId })
-    .then(review => {
+    const checkDownvote = Review.findOne({ _id: params.reviewId })
+    .then(async review => {
         if(review.downvotes.includes(userId)) {
-            return Review.findByIdAndUpdate(
+            return await Review.findByIdAndUpdate(
                 { _id: params.reviewId },
                 { $pull: { downvotes: userId } },
                 { new: true }
@@ -101,16 +101,16 @@ const reviewController = {
   },
 
   downvote({ params, userId }, res) {
-    const downvote = await Review.findOneAndUpdate(
+    const downvote = Review.findOneAndUpdate(
         { _id: params.reviewId },
         { $push: { downvotes: userId } },
         { new: true },
     );
 
-    const checkUpvote = await Review.findOne({ _id: params.reviewId })
-    .then(review => {
+    const checkUpvote = Review.findOne({ _id: params.reviewId })
+    .then(async review => {
         if(review.upvotes.includes(userId)) {
-            return Review.findByIdAndUpdate(
+            return await Review.findByIdAndUpdate(
                 { _id: params.reviewId },
                 { $pull: { upvotes: userId } },
                 { new: true }

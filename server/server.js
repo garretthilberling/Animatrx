@@ -8,9 +8,9 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use(authMiddleware);
+// app.use(authMiddleware);
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/your-anime-list', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/youranimelist', {
   // useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true

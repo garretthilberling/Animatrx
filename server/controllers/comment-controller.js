@@ -24,8 +24,8 @@ const reviewController = {
       });
   },
 
-  getComments({ params, commentId }, res) {
-    Comment.find({ commentId: commentId })
+  getComments({ params }, res) {
+    Comment.find({ animeId: params.animeId })
     .then(comment => res.json(comment))
     .populate({
         path: "upvotes",
@@ -60,8 +60,8 @@ const reviewController = {
   },
 
   removeComment({params, commentId}, res) {
-    const rmComment = await Comment.findOneAndDelete({ _id: commentId});
-    const updateReview = await Review.findOneAndUpdate(
+    const rmComment = Comment.findOneAndDelete({ _id: commentId});
+    const updateReview = Review.findOneAndUpdate(
         { _id: params.reviewId},
         { $pull: { comments: commentId } },
         { new: true }
@@ -85,9 +85,9 @@ const reviewController = {
     );
 
     const checkDownvote = Comment.findOne({ _id: commentId })
-    .then(comment => {
+    .then(async comment => {
         if(comment.downvotes.includes(userId)) {
-            return Comment.findByIdAndUpdate(
+            return await Comment.findByIdAndUpdate(
                 { _id: commentId },
                 { $pull: { downvotes: userId } },
                 { new: true }
@@ -101,16 +101,16 @@ const reviewController = {
   },
 
   downvote({ commentId, userId }, res) {
-    const downvote = await Comment.findOneAndUpdate(
+    const downvote = Comment.findOneAndUpdate(
         { _id: commentId },
         { $push: { downvotes: userId } },
         { new: true },
     );
 
-    const checkUpvote = await Comment.findOne({ _id: commentId })
-    .then(review => {
+    const checkUpvote = Comment.findOne({ _id: commentId })
+    .then(async review => {
         if(review.upvotes.includes(userId)) {
-            return Comment.findByIdAndUpdate(
+            return await Comment.findByIdAndUpdate(
                 { _id: commentId },
                 { $pull: { upvotes: userId } },
                 { new: true }
@@ -126,7 +126,7 @@ const reviewController = {
   addReply({ commentId, body, userId }, res) {
     // create comment
     Comment.Create({ body: body, userId: userId})
-    .then(comment => {
+    .then(async comment => {
         // update comment we are replying to
         const updatecomment = await Comment.findOneAndUpdate(
             {_id: commentId},
@@ -147,8 +147,8 @@ const reviewController = {
   },
 
   removeReply({commentId, replyId, userId}, res) {
-    const rmReply = await Comment.findOneAndDelete({ _id: replyId});
-    const updateComment = await Comment.findOneAndUpdate(
+    const rmReply = Comment.findOneAndDelete({ _id: replyId});
+    const updateComment = Comment.findOneAndUpdate(
         { _id: commentId },
         { $pull: { comments: replyId } },
         { new: true }
