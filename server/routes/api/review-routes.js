@@ -13,11 +13,13 @@ router.route("/:animeId/reviews")
 .get(getReviews)
 .post(addReview);
 
-router.route("/:animeId/reviews/:id")
+router.route("/:animeId/reviews/:reviewId")
 .get(getReview)
 .put(updateReview)
-.delete(removeReview)
-.post(upvote)
+.delete(removeReview);
+router.route("/:animeId/reviews/:reviewId/upvote")
+.post(upvote);
+router.route("/:animeId/reviews/:reviewId/downvote")
 .post(downvote);
 
 module.exports = router;

@@ -27,7 +27,6 @@ const reviewController = {
 
   getReviews({ params }, res) {
     Review.find({ animeId: params.animeId })
-    .then(reviews => res.json(reviews))
     .populate({
         path: "upvotes",
         select: "-__v",
@@ -42,6 +41,7 @@ const reviewController = {
     })
     .select("-__v")
     .sort({ _id: -1 })
+    .then(reviews => res.json(reviews))
     .catch(err => {
         console.error(err);
         res.sendStatus(400);
@@ -66,10 +66,10 @@ const reviewController = {
     .catch(err => res.json(err));
   },
 
-  removeReview({params}, res) {
+  removeReview({params, body}, res) {
     const rmReview = Review.findOneAndDelete({ _id: params.reviewId});
     const updateUser = User.findOneAndUpdate(
-        { _id: params.userId},
+        { _id: body.userId},
         { $pull: { reviews: params.reviewId } },
         { new: true }
     );
@@ -84,19 +84,26 @@ const reviewController = {
     .catch(err => res.json(err));
   },
 
-  upvote({ params, userId }, res) {
-    const upvote = Review.findOneAndUpdate(
-        { _id: params.reviewId },
-        { $push: { upvotes: userId } },
-        { new: true },
-    );
+  upvote({ params, body }, res) {
+    let id = mongoose.Types.ObjectId(body.userId);
+
+    const upvote = Review.findOne({ _id: params.reviewId })
+    .then(async review => {
+        if(!review.upvotes.includes(id)) {
+            return await Review.findByIdAndUpdate(
+                { _id: params.reviewId },
+                { $push: { upvotes: body.userId } },
+                { new: true }
+            );
+        }
+    });
 
     const checkDownvote = Review.findOne({ _id: params.reviewId })
     .then(async review => {
-        if(review.downvotes.includes(userId)) {
+        if(review.downvotes.includes(id)) {
             return await Review.findByIdAndUpdate(
                 { _id: params.reviewId },
-                { $pull: { downvotes: userId } },
+                { $pull: { downvotes: body.userId } },
                 { new: true }
             );
         }
@@ -107,19 +114,27 @@ const reviewController = {
     .catch(err => res.json(err));
   },
 
-  downvote({ params, userId }, res) {
-    const downvote = Review.findOneAndUpdate(
-        { _id: params.reviewId },
-        { $push: { downvotes: userId } },
-        { new: true },
-    );
+  downvote({ params, body }, res) {
+    let id = mongoose.Types.ObjectId(body.userId);
+
+    const downvote = Review.findOne({ _id: params.reviewId })
+    .then(async review => {
+        if(!review.downvotes.includes(id)) {
+            return await Review.findByIdAndUpdate(
+                { _id: params.reviewId },
+                { $push: { downvotes: body.userId } },
+                { new: true }
+            );
+        }
+    });
 
     const checkUpvote = Review.findOne({ _id: params.reviewId })
     .then(async review => {
-        if(review.upvotes.includes(userId)) {
+      console.log(review.upvotes);
+        if(review.upvotes.includes(id)) {
             return await Review.findByIdAndUpdate(
                 { _id: params.reviewId },
-                { $pull: { upvotes: userId } },
+                { $pull: { upvotes: body.userId } },
                 { new: true }
             );
         }
