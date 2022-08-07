@@ -2,7 +2,7 @@ const { User } = require('../models');
 const { signToken } = require('../utils/auth.js');
 
 const userController = {
-    // login
+    // signup
     addUser(req, res) {
         User.create(req)
         .then(user => {
@@ -11,7 +11,7 @@ const userController = {
         })
         .catch(err => res.json(err));
     },
-    // signup
+    // login 
     login({ email, password }, res) {
         User.findOne({ email })
         .then(user => {
