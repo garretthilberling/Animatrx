@@ -61,7 +61,8 @@ const reviewController = {
   },
 
   updateReview({params, body}, res) {
-    Review.findOneAndUpdate({ _id: params.reviewId }, body)
+    Review.findOneAndUpdate({ _id: params.reviewId }, body,
+      { new: true })
     .then(review => res.json(review))
     .catch(err => res.json(err));
   },
@@ -130,7 +131,6 @@ const reviewController = {
 
     const checkUpvote = Review.findOne({ _id: params.reviewId })
     .then(async review => {
-      console.log(review.upvotes);
         if(review.upvotes.includes(id)) {
             return await Review.findByIdAndUpdate(
                 { _id: params.reviewId },
