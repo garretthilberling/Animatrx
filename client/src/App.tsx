@@ -1,8 +1,5 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AuthService from "./utils/auth";
 
 import Home from "./pages/Home";
 import Anime from "./pages/Anime";
@@ -10,11 +7,13 @@ import Profile from "./pages/Profile";
 import Reviews from "./pages/Reviews";
 import Review from "./pages/Review";
 
+import Footer from "./components/Footer";
+
 function App() {
   return (
     <Router>
-      <main>
-        <div>
+      <main className="page-container">
+        <div className="content-wrap">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/anime/:animeId" element={<Anime />} />
@@ -23,6 +22,7 @@ function App() {
             <Route path="/profile/:username" element={<Profile />} />
           </Routes>
         </div>
+        <Footer />
       </main>
     </Router>
   );
