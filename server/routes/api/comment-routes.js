@@ -12,18 +12,27 @@ const {
 } = require("../../controllers/comment-controller");
 
 router
-.route('/comments')
+.route('/:reviewId/comments')
 .get(getComments)
-.post(addComment)
+.post(addComment);
 
 router
-.route('/comments/:commentId')
+.route('/:reviewId/comments/:commentId')
 .get(getComment)
 .put(updateComment)
 .delete(removeComment)
-.post(upvote)
-.post(downvote)
+
+router
+.route('/:reviewId/comments/:commentId/reply')
 .post(addReply)
 .delete(removeReply);
+
+router
+.route('/:reviewId/comments/:commentId/upvote')
+.post(upvote);
+
+router
+.route('/:reviewId/comments/:commentId/downvote')
+.post(downvote);
 
 module.exports = router;
