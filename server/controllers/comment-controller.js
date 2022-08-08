@@ -49,139 +49,167 @@ const reviewController = {
       });
   },
 
-  addComment({ params, body }, res) {
-    Comment.create({
-      responseId: params.reviewId,
-      userId: body.userId,
-      body: body.body,
-    })
-      .then((comment) => res.json(comment))
-      .catch((err) => res.json(err));
-  },
-
-  updateComment({ params, body }, res) {
-    Comment.findOneAndUpdate({ _id: params.commentId }, body, { new: true })
-      .then((comment) => res.json(comment))
-      .catch((err) => res.json(err));
-  },
-
-  removeComment({ params }, res) {
-    const rmComment = Comment.findOneAndDelete({ _id: params.commentId });
-    const updateReview = Review.findOneAndUpdate(
-      { _id: params.reviewId },
-      { $pull: { comments: params.commentId } },
-      { new: true }
-    );
-
-    Promise.all([rmComment, updateReview])
-      .then((updatedData) => {
-        if (!updatedData) {
-          res.status(404).json({ message: "Invalid comment or review _id." });
-        }
-        res.json(updatedData);
+  addComment({ params, body, headers }, res) {
+    if(headers.authorization) {
+      Comment.create({
+        responseId: params.reviewId,
+        userId: body.userId,
+        body: body.body,
       })
-      .catch((err) => res.json(err));
+        .then((comment) => res.json(comment))
+        .catch((err) => res.json(err));
+    } else {
+      throw new Error('must be logged in!')
+    }
   },
 
-  upvote({ params, body }, res) {
-    let id = mongoose.Types.ObjectId(body.userId);
-
-    const upvote = Comment.findOne({ _id: params.commentId }).then(
-      async (comment) => {
-        if (!comment.upvotes.includes(id)) {
-          return await Comment.findByIdAndUpdate(
-            { _id: params.commentId },
-            { $push: { upvotes: body.userId } },
-            { new: true }
-          );
-        }
-      }
-    );
-
-    const checkDownvote = Comment.findOne({ _id: params.commentId }).then(
-      async (comment) => {
-        if (comment.downvotes.includes(id)) {
-          return await Comment.findByIdAndUpdate(
-            { _id: params.commentId },
-            { $pull: { downvotes: body.userId } },
-            { new: true }
-          );
-        }
-      }
-    );
-
-    Promise.all([upvote, checkDownvote])
-      .then((comment) => res.json(comment))
-      .catch((err) => res.json(err));
+  updateComment({ params, body, headers }, res) {
+    if(headers.authorization) {
+      Comment.findOneAndUpdate({ _id: params.commentId }, body, { new: true })
+        .then((comment) => res.json(comment))
+        .catch((err) => res.json(err));
+    } else {
+      throw new Error('must be logged in!')
+    }
   },
 
-  downvote({ params, body }, res) {
-    let id = mongoose.Types.ObjectId(body.userId);
-
-    const downvote = Comment.findOne({ _id: params.commentId }).then(
-      async (comment) => {
-        if (!comment.downvotes.includes(id)) {
-          return await Comment.findByIdAndUpdate(
-            { _id: params.commentId },
-            { $push: { downvotes: body.userId } },
-            { new: true }
-          );
-        }
-      }
-    );
-
-    const checkUpvote = Comment.findOne({ _id: params.commentId }).then(
-      async (comment) => {
-        if (comment.upvotes.includes(id)) {
-          return await Comment.findByIdAndUpdate(
-            { _id: params.commentId },
-            { $pull: { upvotes: body.userId } },
-            { new: true }
-          );
-        }
-      }
-    );
-
-    Promise.all([downvote, checkUpvote])
-      .then((comment) => res.json(comment))
-      .catch((err) => res.json(err));
+  removeComment({ params, headers }, res) {
+    if(headers.authorization) {
+      const rmComment = Comment.findOneAndDelete({ _id: params.commentId });
+      const updateReview = Review.findOneAndUpdate(
+        { _id: params.reviewId },
+        { $pull: { comments: params.commentId } },
+        { new: true }
+      );
+  
+      Promise.all([rmComment, updateReview])
+        .then((updatedData) => {
+          if (!updatedData) {
+            res.status(404).json({ message: "Invalid comment or review _id." });
+          }
+          res.json(updatedData);
+        })
+        .catch((err) => res.json(err));
+    } else {
+      throw new Error('must be logged in!')
+    }
   },
 
-  addReply({ params, body }, res) {
-    // create comment
-    Comment.create({
-      body: body.body,
-      userId: body.userId,
-      responseId: params.commentId,
-    })
-      .then(async (comment) => {
-        // update comment we are replying to
-        return await Comment.findOneAndUpdate(
-          { _id: params.commentId },
-          { $push: { replies: comment._id } },
-          { new: true }
-        )
-          .then((comment) => res.json(comment))
-          .catch((err) => res.json(err));
-      });
+  upvote({ params, body, headers }, res) {
+    if(headers.authorization) {
+      let id = mongoose.Types.ObjectId(body.userId);
+  
+      const upvote = Comment.findOne({ _id: params.commentId }).then(
+        async (comment) => {
+          if (!comment.upvotes.includes(id)) {
+            return await Comment.findByIdAndUpdate(
+              { _id: params.commentId },
+              { $push: { upvotes: body.userId } },
+              { new: true }
+            );
+          }
+        }
+      );
+  
+      const checkDownvote = Comment.findOne({ _id: params.commentId }).then(
+        async (comment) => {
+          if (comment.downvotes.includes(id)) {
+            return await Comment.findByIdAndUpdate(
+              { _id: params.commentId },
+              { $pull: { downvotes: body.userId } },
+              { new: true }
+            );
+          }
+        }
+      );
+  
+      Promise.all([upvote, checkDownvote])
+        .then((comment) => res.json(comment))
+        .catch((err) => res.json(err));
+    } else {
+      throw new Error('must be logged in!')
+    }
   },
 
-  removeReply({ params, body }, res) {
-    const rmReply = Comment.findOneAndDelete({ _id: body.replyId });
-    const updateComment = Comment.findOneAndUpdate(
-      { _id: params.commentId },
-      { $pull: { comments: body.replyId } },
-      { new: true }
-    );
-
-    Promise.all([rmReply, updateComment])
-      .then((updatedData) => {
-        if (!updatedData) {
-          res.status(404).json({ message: "Invalid reply or comment _id." });
+  downvote({ params, body, headers }, res) {
+    if(headers.authorization) {
+      let id = mongoose.Types.ObjectId(body.userId);
+  
+      const downvote = Comment.findOne({ _id: params.commentId }).then(
+        async (comment) => {
+          if (!comment.downvotes.includes(id)) {
+            return await Comment.findByIdAndUpdate(
+              { _id: params.commentId },
+              { $push: { downvotes: body.userId } },
+              { new: true }
+            );
+          }
         }
-        res.json(updatedData);
+      );
+  
+      const checkUpvote = Comment.findOne({ _id: params.commentId }).then(
+        async (comment) => {
+          if (comment.upvotes.includes(id)) {
+            return await Comment.findByIdAndUpdate(
+              { _id: params.commentId },
+              { $pull: { upvotes: body.userId } },
+              { new: true }
+            );
+          }
+        }
+      );
+  
+      Promise.all([downvote, checkUpvote])
+        .then((comment) => res.json(comment))
+        .catch((err) => res.json(err));
+    } else {
+      throw new Error('must be logged in!')
+    }
+  },
+
+  addReply({ params, body, headers }, res) {
+    if(headers.authorization) {
+      // create comment
+      Comment.create({
+        body: body.body,
+        userId: body.userId,
+        responseId: params.commentId,
       })
-      .catch((err) => res.json(err));
+        .then(async (comment) => {
+          // update comment we are replying to
+          return await Comment.findOneAndUpdate(
+            { _id: params.commentId },
+            { $push: { replies: comment._id } },
+            { new: true }
+          )
+            .then((comment) => res.json(comment))
+            .catch((err) => res.json(err));
+        });
+    } else {
+      throw new Error('must be logged in!')
+    }
+  },
+
+  removeReply({ params, body, headers }, res) {
+    if(headers.authorization) {
+      const rmReply = Comment.findOneAndDelete({ _id: body.replyId });
+      const updateComment = Comment.findOneAndUpdate(
+        { _id: params.commentId },
+        { $pull: { comments: body.replyId } },
+        { new: true }
+      );
+  
+      Promise.all([rmReply, updateComment])
+        .then((updatedData) => {
+          if (!updatedData) {
+            res.status(404).json({ message: "Invalid reply or comment _id." });
+          }
+          res.json(updatedData);
+        })
+        .catch((err) => res.json(err));
+    } else {
+      throw new Error('must be logged in!')
+    }
   },
 };
 
