@@ -55,7 +55,7 @@ const Home = () => {
         <div className="loading">Loading...</div>
       ) : (
         <div className="page-container">
-          <div id="anime-container">
+          <div className="anime-border">
           <div className="btns-container">
               <button
                 className="prev-btn"
