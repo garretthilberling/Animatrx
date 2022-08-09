@@ -1,20 +1,23 @@
+import { parameter } from "./types";
+
 class KitsuApi {
   baseUrl: string = "https://kitsu.io/api/edge/";
   getHeaders: object = {
     method: "GET",
     headers: {
-      "Accept": "application/vnd.api+json",
-      "Content-Type": "application/vnd.api+json"
+      Accept: "application/vnd.api+json",
+      "Content-Type": "application/vnd.api+json",
     },
   };
 
-  getAnimeByGenre(
-    genre: string,
-    setOutput: React.Dispatch<React.SetStateAction<string>>,
+  getAllAnime(
+    setOutput: React.Dispatch<React.SetStateAction<object[]>>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    setError: React.Dispatch<React.SetStateAction<string>>
+    setError: React.Dispatch<React.SetStateAction<string>>,
+    offset: number
   ) {
-    let url: string = this.baseUrl + `anime?filter%5Bcategories%5D=${genre}`;
+      console.log(offset);
+    let url = this.baseUrl + `/anime?page%5Blimit%5D=20&page%5Boffset%5D=${offset}`;
     fetch(url, this.getHeaders)
       .then((response) => {
         if (response.ok) {
@@ -23,7 +26,7 @@ class KitsuApi {
         throw response;
       })
       .then((data) => {
-        setOutput(data);
+          setOutput(data.data);
       })
       .catch((error) => {
         console.error(error);
@@ -34,14 +37,22 @@ class KitsuApi {
       });
   }
 
-  getAnimeByTitle(
-    title: string,
+  searchAnime(
+    params: parameter[],
     setOutput: React.Dispatch<React.SetStateAction<string>>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
     setError: React.Dispatch<React.SetStateAction<string>>
   ) {
-    let queryTitle = title.replaceAll(" ", "%20");
-    let url = this.baseUrl + `anime?filter%5Btext%5D=${queryTitle}`;
+    let url = this.baseUrl + "anime?";
+    for (let i = 0; i < params.length; i++) {
+      let next = "";
+      if (i !== params.length - 1) next = "?";
+      url += `filter%5B${params[i].filter}%5D=${params[i].by.replaceAll(
+        " ",
+        "%20"
+      )}${next}`;
+    }
+    console.log(url);
     fetch(url, this.getHeaders)
       .then((response) => {
         if (response.ok) {

@@ -8,11 +8,13 @@ import Reviews from "./pages/Reviews";
 import Review from "./pages/Review";
 
 import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 function App() {
   return (
     <Router>
       <main className="page-container">
+        <Header />
         <div className="content-wrap">
           <Routes>
             <Route path="/" element={<Home />} />
