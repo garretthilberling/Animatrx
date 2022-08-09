@@ -225,3 +225,21 @@ code {
 .next-btn {
   margin-left: auto;
 }
+
+@media only screen and (max-width: 900px) {
+  .anime-img, .btns-container {
+    width: 100% !important;
+  }
+
+  .anime-title-wrapper {
+    text-overflow: ellipsis;
+  }
+
+  .page-container {
+    overflow: hidden;
+  }
+
+  .anime-container > .anime-title-wrapper > .anime-title {
+    text-overflow: ellipsis;
+  }
+}
