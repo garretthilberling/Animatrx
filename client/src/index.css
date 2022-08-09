@@ -84,8 +84,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 body::-webkit-scrollbar {
@@ -175,6 +175,12 @@ code {
   width: max-content;
   padding-left: 1rem;
   padding-right: 10rem;
+  border-radius: 0 0 10px 10px;
+}
+
+.anime-img {
+  width: 900px;
+  border-radius: 0 0 10px 10px;
 }
 
 .page-container {
@@ -185,31 +191,27 @@ code {
   position: sticky;
   top: 0;
   z-index: 999;
-  margin: 0 auto;  
+  margin: 0 auto;
   display: flex;
   justify-content: space-around;
-  width: 55%;
-  background-image: linear-gradient(
-    to right,
-    rgb(23, 3, 18, 0.0),
-    rgb(23, 3, 18, 0.6),
-    rgb(23, 3, 18, 0)
-  );
+  width: 900px;
+  background: rgb(130, 17, 102, 0.75);
 }
 
-.next-btn, .prev-btn {
+.next-btn,
+.prev-btn {
   margin: 0 1rem;
   cursor: pointer;
-  /* background: rgb(250, 244, 228, .75); */
   background: none;
   border-width: 0;
-  border-radius: .5rem;
-  padding: .5rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
   font-size: 1.5rem;
   color: var(--dutch-white-100);
 }
 
-.next-btn:hover, .prev-btn:hover {
+.next-btn:hover,
+.prev-btn:hover {
   /* background: rgb(250, 244, 228, 1); */
   transition: all;
   transition-duration: 300ms;
