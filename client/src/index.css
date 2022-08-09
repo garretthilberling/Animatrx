@@ -83,7 +83,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
@@ -229,20 +230,22 @@ code {
 @media only screen and (max-width: 900px) {
   .anime-img, .btns-container {
     width: 100% !important;
-    overflow-x: hidden;
+    /* overflow-x: hidden;
     overflow-y: scroll;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; */
   }
 
   .anime-title-wrapper {
     text-overflow: ellipsis;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    /* overflow-x: hidden;
+    overflow-y: scroll; */
   }
 
   .page-container {
     overflow-x: hidden;
+    text-overflow: ellipsis;
     overflow-y: scroll;
+    /* padding: 0 .25rem; */
   }
 
   .anime-title {
