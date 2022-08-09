@@ -71,6 +71,32 @@ class KitsuApi {
         setLoading(false);
       });
   }
+
+  getSingleAnime (
+    id: string,
+    setOutput: React.Dispatch<React.SetStateAction<string>>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    setError: React.Dispatch<React.SetStateAction<string>>
+  ) {
+    let url = this.baseUrl + `anime/${id}`;
+    fetch(url, this.getHeaders)
+    .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw response;
+      })
+      .then((data) => {
+        setOutput(data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
 }
 
 export default new KitsuApi();

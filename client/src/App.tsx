@@ -18,7 +18,7 @@ function App() {
         <div className="content-wrap">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/anime/:animeId" element={<Anime />} />
+            <Route path="/:animeName/:animeId" element={<Anime />} />
             <Route path="anime/:animeId/reviews" element={<Reviews />} />
             <Route path="anime/:animeId/reviews/:reviewId" element={<Review />} />
             <Route path="/profile/:username" element={<Profile />} />

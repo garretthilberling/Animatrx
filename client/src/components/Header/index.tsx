@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="header">
       <Link to="/" className="font-logo">
-        YourAnimeList
+      Animatrx
       </Link>
     </div>
   );
