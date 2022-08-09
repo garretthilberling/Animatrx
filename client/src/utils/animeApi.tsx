@@ -1,15 +1,42 @@
-import { parameter } from './types';
+import { parameter } from "./types";
 
 class KitsuApi {
   baseUrl: string = "https://kitsu.io/api/edge/";
   getHeaders: object = {
     method: "GET",
     headers: {
-      "Accept": "application/vnd.api+json",
-      "Content-Type": "application/vnd.api+json"
+      Accept: "application/vnd.api+json",
+      "Content-Type": "application/vnd.api+json",
     },
   };
-  
+
+  getAllAnime(
+    setOutput: React.Dispatch<React.SetStateAction<object[]>>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    setError: React.Dispatch<React.SetStateAction<string>>,
+    offset: number
+  ) {
+      console.log(offset);
+    let url = this.baseUrl + `/anime?page%5Blimit%5D=20&page%5Boffset%5D=${offset}`;
+    fetch(url, this.getHeaders)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw response;
+      })
+      .then((data) => {
+          setOutput(data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
   searchAnime(
     params: parameter[],
     setOutput: React.Dispatch<React.SetStateAction<string>>,
@@ -17,9 +44,15 @@ class KitsuApi {
     setError: React.Dispatch<React.SetStateAction<string>>
   ) {
     let url = this.baseUrl + "anime?";
-    for(let i = 0; i < params.length; i++) {
-        url+=`filter%5B${params[i].filter}%5D=${params[i].by.replaceAll(" ", "%20")}`
+    for (let i = 0; i < params.length; i++) {
+      let next = "";
+      if (i !== params.length - 1) next = "?";
+      url += `filter%5B${params[i].filter}%5D=${params[i].by.replaceAll(
+        " ",
+        "%20"
+      )}${next}`;
     }
+    console.log(url);
     fetch(url, this.getHeaders)
       .then((response) => {
         if (response.ok) {
