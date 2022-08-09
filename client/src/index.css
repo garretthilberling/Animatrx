@@ -236,7 +236,7 @@ code {
   }
 
   .page-container {
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
   .anime-container > .anime-title-wrapper > .anime-title {
