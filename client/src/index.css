@@ -237,6 +237,7 @@ code {
 
   .page-container {
     overflow-x: hidden;
+    overflow-y: scroll;
   }
 
   .anime-container > .anime-title-wrapper > .anime-title {
