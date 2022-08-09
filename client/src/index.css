@@ -229,10 +229,15 @@ code {
 @media only screen and (max-width: 900px) {
   .anime-img, .btns-container {
     width: 100% !important;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-overflow: ellipsis;
   }
 
   .anime-title-wrapper {
     text-overflow: ellipsis;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 
   .page-container {
@@ -240,7 +245,7 @@ code {
     overflow-y: scroll;
   }
 
-  .anime-container > .anime-title-wrapper > .anime-title {
+  .anime-title {
     text-overflow: ellipsis;
   }
 }
