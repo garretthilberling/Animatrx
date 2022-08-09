@@ -31,15 +31,6 @@ const Home = () => {
     }
   };
 
-  const setWidth = () => {
-    let animeContainer = document.getElementById('anime-container') as HTMLElement;
-    let style = window.getComputedStyle(animeContainer, "");
-    let wdt = style.getPropertyValue('width');
-    (document.querySelector('.btns-container') as HTMLElement).style.width = wdt;
-  }
-
-//   setWidth();
-
   useEffect(() => {
     KitsuApi.getAllAnime(setApiData, setLoading, setError, offset);
     console.log(apiData);
