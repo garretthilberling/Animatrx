@@ -1,10 +1,12 @@
 import decode, { JwtPayload } from 'jwt-decode';
+import { authService } from './types';
 
-class AuthService {
+const AuthService: authService = {
     // retrieve data saved in token
-    getProfile(): null {
-        return decode(this.getToken() || '{}');
-    }
+    getProfile() {
+        let token = this.getToken() || '{}'
+        return decode(token);
+    },
 
     // check if the user is still logged in
     loggedIn() {
@@ -12,7 +14,7 @@ class AuthService {
         const token = this.getToken();
         // use type coersion to check if token is NOT undefined and the token is NOT expired
         return !!token && !this.isTokenExpired(token);
-    }
+    },
 
     // check if the token has expired
     isTokenExpired(token: string) {
@@ -26,21 +28,20 @@ class AuthService {
         } catch (err) {
             return false;
         }
-    }
+    },
 
     // retrieve token from localStorage
     getToken() {
         // Retrieves the user token from localStorage
         return localStorage.getItem('id_token');
-    }
+    },
 
     // set token to localStorage and reload page to homepage
     login(idToken: string) {
         // Saves user token to localStorage
         localStorage.setItem('id_token', idToken);
-
         window.location.assign('/');
-    }
+    },
 
     // clear token from localStorage and force logout with reload
     logout() {
@@ -51,4 +52,4 @@ class AuthService {
     }
 }
 
-export default new AuthService();
+export default AuthService;
