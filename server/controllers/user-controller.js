@@ -34,7 +34,7 @@ const userController = {
   },
   // profile
   getUserProfile({ params }, res) {
-    User.findOne({ _id: params.id })
+    User.findOne({ username: params.username })
       .populate({
         path: "savedAnime",
         select: "-__v",

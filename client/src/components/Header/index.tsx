@@ -7,6 +7,8 @@ const Header = () => {
     event.preventDefault();
     AuthService.logout();
   };
+  let username;
+  if(AuthService.loggedIn()) username = AuthService.getProfile().data.username;
   return (
     <div className="header">
       <div>
@@ -16,11 +18,18 @@ const Header = () => {
       </div>
       <ul>
         {AuthService.loggedIn() ? (
-          <li>
-            <button onClick={(e) => logout(e)} className="nav-btn">
-              Logout
-            </button>
-          </li>
+          <>
+            <li>
+              <button onClick={(e) => logout(e)} className="nav-btn">
+                Logout
+              </button>
+            </li>
+            <li>
+              <Link to={`/profile/${username}`} className="nav-btn">
+                Profile
+              </Link>
+            </li>
+          </>
         ) : (
           <>
             <li>

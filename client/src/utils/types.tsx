@@ -24,10 +24,10 @@ export type userOutput = {
 }
 
 export type authService = {
-    getProfile(): string 
+    getProfile(): any 
     loggedIn(): boolean | void
     isTokenExpired(token: string): boolean
     getToken(): string | null
-    login(idToken: string): void
+    login(idToken: userOutput): void
     logout(): void
 }

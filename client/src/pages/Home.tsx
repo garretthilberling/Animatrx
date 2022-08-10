@@ -33,7 +33,6 @@ const Home = () => {
 
   useEffect(() => {
     KitsuApi.getAllAnime(setApiData, setLoading, setError, offset);
-    console.log(apiData);
   }, [loading]);
 
   // useEffect(() => {
