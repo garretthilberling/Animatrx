@@ -79,7 +79,7 @@ const Signup = () => {
             Submit
           </button>
          
-          {/* {error && <div className='form-input-margin'>Sign up failed</div>} */}
+          {error && <div className='form-input-margin'>Sign up failed</div>}
         </form>
       </div>
     </div>

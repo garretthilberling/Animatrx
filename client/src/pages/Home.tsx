@@ -33,7 +33,6 @@ const Home = () => {
 
   useEffect(() => {
     KitsuApi.getAllAnime(setApiData, setLoading, setError, offset);
-    console.log(apiData);
   }, [loading]);
 
   // useEffect(() => {
@@ -42,50 +41,55 @@ const Home = () => {
 
   return (
     <div className="">
-      {loading ? (
-        <div className="loading">Loading...</div>
-      ) : (
-        <div className="page-container">
-          <div className="anime-border">
-          <div className="btns-container">
-              <button
-                className="prev-btn"
-                type="submit"
-                onClick={handlePrevResults}
-              >
-                Prev
-              </button>
-              <button
-                className="next-btn"
-                type="submit"
-                onClick={handleNextResults}
-              >
-                Next
-              </button>
+      <div className="page-container">
+        <div className="anime-border">
+          <div className={`btns-container ${loading && 'btns-container-bottom'}`}>
+            <button
+              className="prev-btn"
+              type="submit"
+              onClick={handlePrevResults}
+            >
+              Prev
+            </button>
+            <input
+              type="text"
+              className="search-bar"
+              placeholder="Search by name"
+            ></input>
+            <button
+              className="next-btn"
+              type="submit"
+              onClick={handleNextResults}
+            >
+              Next
+            </button>
           </div>
-          {apiData.map((anime: any, index: number) => (
-            <div key={index}>
-              {anime?.attributes?.coverImage?.tiny && (
-                <div className="anime-container">
-                  <Link to={`/${anime.attributes.slug}/${anime.id}`}>
-                    <img
-                      src={anime?.attributes?.coverImage?.tiny}
-                      alt="cover-img"
-                      className="anime-img"
-                    ></img>
-                    <div className="anime-title-wrapper">
-                      <p className="anime-title">
-                        {anime?.attributes?.canonicalTitle}
-                      </p>
-                    </div>
-                  </Link>
-                </div>
-              )}
-            </div>
-          ))}
-          </div>
+          {loading ? (
+            <div className="loading">Loading...</div>
+          ) : (
+            apiData.map((anime: any, index: number) => (
+              <div key={index}>
+                {anime?.attributes?.coverImage?.tiny && (
+                  <div className={`anime-container ${index !== 0 && 'anime-container-top-border'}`}>
+                    <Link to={`/${anime.attributes.slug}/${anime.id}`}>
+                      <img
+                        src={anime?.attributes?.coverImage?.tiny}
+                        alt="cover-img"
+                        className={`anime-img ${index !== 0 && 'anime-img-top-border'}`}
+                      ></img>
+                      <div className="anime-title-wrapper">
+                        <p className="anime-title">
+                          {anime?.attributes?.canonicalTitle}
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            ))
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

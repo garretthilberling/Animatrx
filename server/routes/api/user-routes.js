@@ -10,7 +10,7 @@ router.route("/signup").post(addUser);
 
 router.route("/login").post(login);
 
-router.route("/user/:id").get(getUserProfile);
+router.route("/user/:username").get(getUserProfile);
 
 router.route("/users").get(getAllUsers);
 

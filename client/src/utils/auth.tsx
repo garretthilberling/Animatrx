@@ -1,5 +1,5 @@
 import decode, { JwtPayload } from 'jwt-decode';
-import { authService } from './types';
+import { authService, userOutput } from './types';
 
 const AuthService: authService = {
     // retrieve data saved in token
@@ -37,9 +37,10 @@ const AuthService: authService = {
     },
 
     // set token to localStorage and reload page to homepage
-    login(idToken: string) {
+    login(data: userOutput) {
         // Saves user token to localStorage
-        localStorage.setItem('id_token', idToken);
+        localStorage.setItem('id_token', data.token);
+        localStorage.setItem('username', data.user.username);
         window.location.assign('/');
     },
 
