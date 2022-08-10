@@ -12,57 +12,57 @@
 @import url("https://fonts.googleapis.com/css2?family=Contrail+One&display=swap");
 
 :root {
-  --dutch-white-100: #fcf9f2;
-  --dutch-white-200: #faf4e4;
-  --dutch-white-300: #f7eed7;
-  --dutch-white-400: #f5e9c9;
-  --dutch-white-500: #f2e3bc;
+  --off-white-100: #fcfdef;
+  --off-white-200: #f7f8ce;
+  --off-white-300: #f7f8ce;
+  --off-white-400: #f5f5be;
+  --off-white-500: #F2F3AE;
 
-  --soft-purple-100: #efedf4;
-  --soft-purple-200: #dedce9;
-  --soft-purple-300: #cecadf;
-  --soft-purple-400: #bdb9d4;
-  --soft-purple-500: #ada7c9;
+  --soft-blue-100: #cbeff4;
+  --soft-blue-200: #98deea;
+  --soft-blue-300: #64cedf;
+  --soft-blue-400: #30bdd4;
+  --soft-blue-500: #2292A4;
 
-  --soft-pink-100: #fce9f3;
-  --soft-pink-200: #f8d3e7;
-  --soft-pink-300: #f5beda;
-  --soft-pink-400: #f1a8ce;
-  --soft-pink-500: #ee92c2;
+  --slate-100: #bcc8ce;
+  --slate-200: #bcc8ce;
+  --slate-300: #9bacb5;
+  --slate-400: #79909c;
+  --slate-500: #5D737E;
 
-  --blue-green-100: #b3f4fe;
-  --blue-green-200: #68e9fd;
-  --blue-green-300: #1cdefb;
-  --blue-green-400: #03aec8;
-  --blue-green-500: #026c7c;
+  --deep-red-100: #fac1be;
+  --deep-red-200: #f4847d;
+  --deep-red-300: #ef463c;
+  --deep-red-400: #d31d11;
+  --deep-red-500: #92140C;
 
-  --dark-100: #821166;
-  --dark-200: #6d0e55;
-  --dark-300: #570b44;
-  --dark-400: #420933;
-  --dark-500: #170312;
+  --dark-100: #c3dacf;
+  --dark-200: #88b59e;
+  --dark-300: #54876e;
+  --dark-400: #2f4c3d;
+  --dark-500: #0A100D;
 
-  background: hsla(315, 77%, 5%, 1);
+  background: var(--dark-500);
 
   background: linear-gradient(
     90deg,
-    hsla(315, 77%, 5%, 1) 0%,
-    hsla(188, 97%, 25%, 1) 47%,
-    hsla(328, 73%, 90%, 1) 100%
+    var(--dark-500) 0%,
+    var(--deep-red-500) 47%,
+    var(--deep-red-100) 100%
   );
 
   background: -moz-linear-gradient(
     90deg,
-    hsla(315, 77%, 5%, 1) 0%,
-    hsla(188, 97%, 25%, 1) 47%,
-    hsla(328, 73%, 90%, 1) 100%
+    var(--dark-500) 0%,
+    var(--deep-red-500) 47%,
+    var(--deep-red-100) 100%
   );
 
   background: -webkit-linear-gradient(
     90deg,
-    hsla(315, 77%, 5%, 1) 0%,
-    hsla(188, 97%, 25%, 1) 47%,
-    hsla(328, 73%, 90%, 1) 100%
+    var(--dark-500) 0%,
+    var(--deep-red-500) 47%,
+    var(--deep-red-100) 100%
   );
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#170312", endColorstr="#026C7C", GradientType=1 );
@@ -115,7 +115,7 @@ code {
   text-align: center;
   padding: 1.25em;
   font-size: 1.25em;
-  color: var(--dutch-white-200);
+  color: var(--off-white-100);
 }
 
 .font-logo {
@@ -143,21 +143,31 @@ code {
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
   font-size: 2rem;
-  color: var(--dark-400);
+  color: var(--off-white-100);
 }
+
 
 .anime-container {
   position: relative;
   width: fit-content;
   margin: 0 auto 2rem;
+  border-radius: 0 0 10px 10px;
+  border-width: 0 .25rem .25rem .25rem;
+  border-style: solid;
+  border-color: var(--deep-red-400);
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
 }
 
+.anime-container-top-border {
+  border-radius: 10px;
+  border-width: .25rem;
+}
 .anime-container:hover .anime-title {
-  color: var(--soft-purple-300);
+  color: var(--soft-blue-200);
 }
 
 .anime-title {
-  color: var(--dutch-white-100);
+  color: var(--off-white-100);
   text-decoration: none;
   font-size: 1.5rem;
   opacity: 1;
@@ -182,6 +192,11 @@ code {
 .anime-img {
   width: 900px;
   border-radius: 0 0 10px 10px;
+  /* bottom: 0; */
+}
+
+.anime-img-top-border {
+  border-radius: 10px;
 }
 
 .page-container {
@@ -196,7 +211,15 @@ code {
   display: flex;
   justify-content: space-around;
   width: 900px;
-  background: rgb(130, 17, 102, 0.75);
+  background: var(--deep-red-500);
+  border-width: .25rem .25rem 0 .25rem;
+  border-style: solid;
+  border-color: var(--deep-red-400);
+}
+
+.btns-container-bottom {
+  border-width: .25rem;
+  border-radius: 0 0 10px 10px;
 }
 
 .next-btn,
@@ -208,7 +231,9 @@ code {
   border-radius: 0.5rem;
   padding: 0.5rem;
   font-size: 1.5rem;
-  color: var(--dutch-white-100);
+  color: var(--off-white-100);
+  transition: all;
+  transition-duration: 300ms;
 }
 
 .next-btn:hover,
@@ -216,7 +241,7 @@ code {
   /* background: rgb(250, 244, 228, 1); */
   transition: all;
   transition-duration: 300ms;
-  color: var(--soft-purple-300);
+  color: var(--soft-blue-100);
 }
 
 .prev-btn {
@@ -225,6 +250,11 @@ code {
 
 .next-btn {
   margin-left: auto;
+}
+
+.search-bar {
+  width: 60%;
+  margin: .5rem 0;
 }
 
 @media only screen and (max-width: 900px) {
@@ -236,7 +266,7 @@ code {
   }
 
   .anime-title-wrapper {
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis; */
     /* overflow-x: hidden;
     overflow-y: scroll; */
   }

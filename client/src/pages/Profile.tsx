@@ -18,7 +18,7 @@ const Profile = () => {
     {loading ? (
       <div>Loading...</div>
     ) : (
-      <div>data.username</div>
+      <div>{data.username}</div>
     )}
   </div>
   );
