@@ -38,4 +38,6 @@ const animeSchema = new Schema({
 //   return sum / this.reviews.length;
 // });
 
-module.exports = animeSchema;
+const Anime = model('Anime', animeSchema);
+
+module.exports = Anime;
