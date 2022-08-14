@@ -16,7 +16,7 @@ const Header = () => {
           Animatrx
         </Link>
       </div>
-      <ul>
+      <ul className="nav-bar">
         {AuthService.loggedIn() ? (
           <>
             <li>
