@@ -21,7 +21,8 @@ const UserSchema = new Schema(
       required: true,
       minlength: 5,
     },
-    savedAnime: [{ type: String }],
+    watchLater: [{ type: String }],
+    favorites: [{ type: String }],
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   },
   {
