@@ -36,11 +36,15 @@ const userController = {
   getUserProfile({ params }, res) {
     User.findOne({ username: params.username })
       .populate({
-        path: "savedAnime",
+        path: "reviews",
         select: "-__v",
       })
       .populate({
-        path: "reviews",
+        path: "watchLater",
+        select: "-__v",
+      })
+      .populate({
+        path: "favorites",
         select: "-__v",
       })
       .select("-__v")
