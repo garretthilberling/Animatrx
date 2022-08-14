@@ -145,9 +145,6 @@ button {
 .header {
   padding-left: 1rem;
   display: flex;
-  position: sticky;
-  top: 0;
-  z-index: 999;
 }
 
 .nav-bar {
@@ -296,6 +293,8 @@ button {
 
 .single-page-container {
   display: fit-content;
+  margin-bottom: 3rem;
+  margin-top: 1.5rem;
 }
 
 .single-anime-border {

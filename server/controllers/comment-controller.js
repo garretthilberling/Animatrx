@@ -107,6 +107,13 @@ const reviewController = {
               { $push: { upvotes: body.userId } },
               { new: true }
             );
+          } else {
+            // undo upvote
+            return await Comment.findByIdAndUpdate(
+              { _id: params.commentId },
+              { $pull: { upvotes: body.userId } },
+              { new: true }
+            );
           }
         }
       );
@@ -141,6 +148,13 @@ const reviewController = {
             return await Comment.findByIdAndUpdate(
               { _id: params.commentId },
               { $push: { downvotes: body.userId } },
+              { new: true }
+            );
+          } else {
+            // undo downvote
+            return await Comment.findByIdAndUpdate(
+              { _id: params.commentId },
+              { $pull: { downvotes: body.userId } },
               { new: true }
             );
           }
