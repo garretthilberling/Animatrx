@@ -4,6 +4,8 @@ import KitsuApi from "../utils/animeApi";
 import ReactPlayer from "react-player";
 import YtApi from "../utils/ytSearchApi";
 import { youtubeVideo } from "../utils/types";
+import AuthService from "../utils/auth";
+import FaveOrWatchLater from "../components/FaveOrWatchLater";
 
 const Anime = () => {
   const [apiData, setApiData] = useState<any>("");
@@ -18,11 +20,11 @@ const Anime = () => {
 
   useEffect(() => {
     YtApi.ytReq(apiData?.attributes?.canonicalTitle);
-      // .then((data) => {
-      //   setVideo(data);
-      //   data.json();
-      // })
-      // .catch((error) => console.log(error));
+    // .then((data) => {
+    //   setVideo(data);
+    //   data.json();
+    // })
+    // .catch((error) => console.log(error));
     // console.log(video);
   }, [apiData]);
   return (
@@ -42,17 +44,20 @@ const Anime = () => {
                   ></img>
                   <div className="single-description-container">
                     <div className="single-description-card">
-                      <h3>
-                        {apiData?.attributes?.canonicalTitle} (
-                        {apiData?.attributes?.startDate})
-                      </h3>
-                      <h4>{apiData?.attributes?.titles?.en_jp}</h4>
-                      <span>
-                        {Math.round(apiData?.attributes?.averageRating * 10) /
-                          100}
-                        /10
-                      </span>
-                      <p>{apiData?.attributes?.description}</p>
+                      <>
+                        <h3>
+                          {apiData?.attributes?.canonicalTitle} (
+                          {apiData?.attributes?.startDate})
+                        </h3>
+                        <h4>{apiData?.attributes?.titles?.en_jp}</h4>
+                        <span>
+                          {Math.round(apiData?.attributes?.averageRating * 10) /
+                            100}
+                          /10
+                        </span>
+                        {AuthService.loggedIn() && <FaveOrWatchLater />}
+                        <p>{apiData?.attributes?.description}</p>
+                      </>
                       <div className="youtube-trailer">
                         {apiData?.attributes?.youtubeVideoId ? (
                           <ReactPlayer
