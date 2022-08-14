@@ -31,3 +31,7 @@ export type authService = {
     login(idToken: userOutput): void
     logout(): void
 }
+
+export type youtubeVideo = {
+    get(): void
+}

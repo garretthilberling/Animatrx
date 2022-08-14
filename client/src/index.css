@@ -180,13 +180,14 @@ code {
   border-radius: 0 0 10px 10px;
   border-width: 0 .25rem .25rem .25rem;
   border-style: solid;
-  border-color: var(--deep-red-400);
+  border-color: var(--soft-blue-100);
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
 }
 
 .anime-container-top-border {
   border-radius: 10px;
   border-width: .25rem;
+  border-color: var(--soft-blue-100);
 }
 .anime-container:hover .anime-title {
   color: var(--soft-blue-200);
@@ -239,7 +240,7 @@ code {
   background: var(--deep-red-500);
   border-width: .25rem .25rem 0 .25rem;
   border-style: solid;
-  border-color: var(--deep-red-400);
+  border-color: var(--soft-blue-100);
 }
 
 .btns-container-bottom {
@@ -279,6 +280,58 @@ code {
 .search-bar {
   width: 60%;
   margin: .5rem 0;
+}
+
+.single-page-container {
+  display: fit-content;
+}
+
+.single-anime-border {
+}
+
+.single-anime-container {
+  display: flex;
+}
+
+.single-anime-img {
+  max-width: 400px;
+  border-radius: .5rem;
+  margin-left: 1rem;
+}
+
+.single-description-container {
+  margin: 0 2rem;
+}
+
+.single-description-card {
+  padding: 1rem;
+  background: var(--soft-blue-500);
+  border-radius: .5rem;
+
+  background: linear-gradient(
+    90deg,
+    var(--soft-blue-100) 47%,
+    var(--soft-blue-400) 100%
+  );
+
+  background: -moz-linear-gradient(
+    90deg,
+    var(--soft-blue-100) 47%,
+    var(--soft-blue-400) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    90deg,
+    var(--soft-blue-100) 47%,
+    var(--soft-blue-400) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#170312", endColorstr="#026C7C", GradientType=1 );
+}
+
+.youtube-trailer {
+  display: flex;
+  justify-content: center;
 }
 
 .login-signup-container {
