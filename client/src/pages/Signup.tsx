@@ -39,13 +39,13 @@ const Signup = () => {
   }
 
   return (
+    <div className='login-signup-container'>
     <div className=''>
-    <div className='uk-card uk-card-body card-centering'>
-      <h4 className='uk-card-title uk-text-center'>Sign Up</h4>
+      <h4 className=''>Sign Up</h4>
       <div className=''>
-        <form className='form-centering form-input-margin' onSubmit={(e) =>  handleFormSubmit(e)}>
+        <form className='login-signup-flex' onSubmit={(e) =>  handleFormSubmit(e)}>
           <input
-            className='form-input-margin'
+            className=''
             placeholder='Username'
             name='username'
             type='username'
@@ -54,7 +54,7 @@ const Signup = () => {
             onChange={handleChange}
           />
           <input
-            className='form-input-margin'
+            className=''
             placeholder='Your email'
             name='email'
             type='email'
@@ -63,7 +63,7 @@ const Signup = () => {
             onChange={handleChange}
           />
           <input
-            className='form-input-margin'
+            className=''
             placeholder='******'
             name='password'
             type='password'
@@ -71,15 +71,15 @@ const Signup = () => {
             value={formState.password}
             onChange={handleChange}
           />
-           <Link className='form-input-margin account-prop' to="/login">
+           <Link className='' to="/login">
             Already have an account?
           
           </Link>
-          <button className='form-input-margin button-border' type='submit'>
+          <button className='submit' type='submit'>
             Submit
           </button>
          
-          {error && <div className='form-input-margin'>Sign up failed</div>}
+          {error && <div className=''>Sign up failed</div>}
         </form>
       </div>
     </div>

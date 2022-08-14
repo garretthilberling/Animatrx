@@ -40,12 +40,12 @@ const Login = () => {
   }
 
   return (
-    <div className="">
+    <div className="login-signup-container">
           <div className="">
             <h4 className="">Login</h4>
             <div className="">
               <form
-                className=""
+                className="login-signup-flex"
                 onSubmit={handleFormSubmit}
               >
                 <input
@@ -70,7 +70,7 @@ const Login = () => {
                   Don't have an account?
                 </Link>
                 <button
-                  className=""
+                  className="submit"
                   type="submit"
                 >
                   Submit
