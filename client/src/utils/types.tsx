@@ -35,3 +35,15 @@ export type authService = {
 export type youtubeVideo = {
     get(): void
 }
+
+export type params = {
+    part: string,
+    maxResults: number,
+    key: string | undefined
+}
+
+export type ytSearch = {
+    baseUrl: string,
+    params: params
+    withCredentials: boolean
+}
