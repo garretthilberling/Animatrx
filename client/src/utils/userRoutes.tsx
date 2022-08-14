@@ -67,7 +67,6 @@ export const getProfile = async (
   setError: React.Dispatch<React.SetStateAction<string>>,
   setOutput: React.Dispatch<React.SetStateAction<userOutput>>
 ) => {
-  // console.log(JSON.stringify(username));
   await fetch(`/api/user/${username}`, {
     method: "GET",
     headers: {
