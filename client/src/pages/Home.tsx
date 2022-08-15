@@ -87,7 +87,9 @@ const Home = () => {
                   <div className={`anime-container ${index !== 0 && 'anime-container-top-border'}`}>
                     <Link to={`/${anime.attributes.slug}/${anime.id}`}>
                       <img
-                        src={anime?.attributes?.coverImage?.tiny}
+                        src={
+                          anime.attributes.coverImage.tiny ? anime.attributes.coverImage.tiny : anime.attributes.coverImage.small
+                        }
                         alt="cover-img"
                         className={`anime-img ${index !== 0 && 'anime-img-top-border'}`}
                       ></img>
