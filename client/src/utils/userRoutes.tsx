@@ -73,7 +73,6 @@ export const getProfile = async (
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    // body: JSON.stringify(username),
   })
     .then((response) => {
       if (response.ok) {

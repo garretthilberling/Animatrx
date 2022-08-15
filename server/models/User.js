@@ -21,6 +21,11 @@ const UserSchema = new Schema(
       required: true,
       minlength: 5,
     },
+    profilePicture: {
+      type: String,
+      data: Buffer,
+      required: false
+    },
     watchLater: [{ type: String }],
     favorites: [{ type: String }],
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],

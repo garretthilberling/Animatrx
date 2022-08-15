@@ -76,6 +76,14 @@
   height: fit-content;
 }
 
+* {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+*::-webkit-scrollbar {
+display: none;  /* Safari and Chrome */
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -131,9 +139,6 @@ input:focus {
   display: flex;
   justify-content: start;
   margin-right: auto;
-}
-
-.font-logo {
   font-family: "Inconsolata", monospace;
   text-decoration: none;
   font-size: 4em;
@@ -453,6 +458,40 @@ input:focus {
 
 .submit:hover {
   background: var(--soft-blue-300);
+}
+
+.profile-container {
+  margin: 0 2rem;
+  width: max-content;
+}
+
+.profile-header {
+  color: var(--off-white-100);
+  font-family: "Inconsolata", monospace;
+  font-weight: semibold;
+}
+
+.content-container {
+  display: flex;
+  overflow-x: scroll;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  position: relative;
+  width: 100vw;
+  /* white-space: nowrap; */
+}
+
+.content-card:hover .anime-title {
+  color: var(--soft-blue-200);
+  width: fit-content;
+}
+
+.content-card {
+  margin-right: 1rem;
+}
+
+.page {
+  margin-bottom: 3rem;
 }
 
 

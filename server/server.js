@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 // app.use(authMiddleware);
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/youranimelist', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/animatrx', {
   // useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true

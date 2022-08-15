@@ -16,8 +16,9 @@ class KitsuApi {
     setError: React.Dispatch<React.SetStateAction<string>>,
     offset: number
   ) {
-      console.log(offset);
-    let url = this.baseUrl + `/anime?page%5Blimit%5D=20&page%5Boffset%5D=${offset}`;
+    console.log(offset);
+    let url =
+      this.baseUrl + `/anime?page%5Blimit%5D=20&page%5Boffset%5D=${offset}`;
     fetch(url, this.getHeaders)
       .then((response) => {
         if (response.ok) {
@@ -26,7 +27,7 @@ class KitsuApi {
         throw response;
       })
       .then((data) => {
-          setOutput(data.data);
+        setOutput(data.data);
       })
       .catch((error) => {
         console.error(error);
@@ -54,8 +55,8 @@ class KitsuApi {
       )}${next}`;
     }
     url += `&page%5Blimit%5D=20&page%5Boffset%5D=${offset}`;
-
     console.log(url);
+
     fetch(url, this.getHeaders)
       .then((response) => {
         if (response.ok) {
@@ -75,7 +76,7 @@ class KitsuApi {
       });
   }
 
-  getSingleAnime (
+  getSingleAnime(
     id: string,
     setOutput: React.Dispatch<React.SetStateAction<string>>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
@@ -83,7 +84,7 @@ class KitsuApi {
   ) {
     let url = this.baseUrl + `anime/${id}`;
     fetch(url, this.getHeaders)
-    .then((response) => {
+      .then((response) => {
         if (response.ok) {
           return response.json();
         }
@@ -98,6 +99,39 @@ class KitsuApi {
       })
       .finally(() => {
         setLoading(false);
+      });
+  }
+
+  getMultipleAnimeById(
+    id: string,
+    idArr: string[],
+    setOutput: React.Dispatch<React.SetStateAction<string[]>>,
+    used: string[],
+    setUsed: React.Dispatch<React.SetStateAction<string[]>>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    setError: React.Dispatch<React.SetStateAction<string>>
+  ) {
+    let url = this.baseUrl + `anime/${id}`;
+    fetch(url, this.getHeaders)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw response;
+      })
+      .then((data) => {
+        console.log(used);
+        if(!used.includes(data.data.id)) {
+          setUsed(prev => [...prev, data.data.id]);
+          setOutput((prev) => [...prev, data.data]);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error);
+      })
+      .finally(() => {
+        if (idArr.indexOf(id) === idArr.length - 1) setLoading(false);
       });
   }
 }
