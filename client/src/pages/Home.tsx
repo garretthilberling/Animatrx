@@ -7,16 +7,7 @@ const Home = () => {
   const [apiData, setApiData] = useState<any>("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [search, setSearch] = useState<parameter[]>([
-    // {
-    //     filter: "text",
-    //     by: "Code"
-    // },
-    // {
-    //     filter: "genre",
-    //     by: "adventure"
-    // }
-  ]);
+  const [search, setSearch] = useState<parameter[]>([]);
   const [offset, setOffset] = useState(0);
 
   const handleNextResults = () => {
@@ -41,16 +32,11 @@ const Home = () => {
       setSearch([]);
     }
     setLoading(true);
-    console.log(search);
   }
 
   useEffect(() => {
     KitsuApi.searchAnime(search, setApiData, setLoading, setError, offset);
   }, [loading, search, offset]);
-
-  // useEffect(() => {
-  //     KitsuApi.searchAnime(search, setApiData, setLoading, setError);
-  // }, [search]);
 
   return (
     <div className="">
