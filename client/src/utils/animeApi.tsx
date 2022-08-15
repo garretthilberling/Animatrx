@@ -1,7 +1,4 @@
 import { parameter } from "./types";
-type animeInfo = {
-  id: string;
-};
 
 class KitsuApi {
   baseUrl: string = "https://kitsu.io/api/edge/";
@@ -123,9 +120,10 @@ class KitsuApi {
         throw response;
       })
       .then((data) => {
+        console.log(used);
         if(!used.includes(data.data.id)) {
-          setOutput((prev) => [...prev, data.data]);
           setUsed(prev => [...prev, data.data.id]);
+          setOutput((prev) => [...prev, data.data]);
         }
       })
       .catch((error) => {

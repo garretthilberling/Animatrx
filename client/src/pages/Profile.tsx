@@ -34,17 +34,17 @@ const Profile = () => {
     data.favorites.forEach((id: any) => {
       KitsuApi.getMultipleAnimeById(id, data.favorites, setFaveData, faveUsed, setFaveUsed, setFaveLoading, setError);
     })
-    console.log(faveUsed);
+    // console.log(faveUsed);
   }
 
   useEffect(() => {
     getProfile(username, setLoading, setError, setData);
-    if(data) {
-      handleQueryWatchLater(data);
-      handleQueryFavorites(data);
+    if(data && !loading) {
+      if(wlLoading) handleQueryWatchLater(data);
+      if(faveLoading) handleQueryFavorites(data);
     }
     // console.log(data);
-  }, [loading, wlLoading, faveLoading]);
+  }, [loading]);
 
   return (
   <div className="">
