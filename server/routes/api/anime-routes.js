@@ -9,7 +9,7 @@ router
 .post(addWatchLater);
 
 router
-.route('/:animeId/fave')
+.route('/:animeId/favorites')
 .post(addFavorites);
 
 module.exports = router;

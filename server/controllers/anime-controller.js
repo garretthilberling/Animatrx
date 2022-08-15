@@ -3,9 +3,9 @@ const { User } = require("../models");
 const animeController = {
     addWatchLater({ params, body, headers }, res) {
         if(headers.authorization) {
+            console.log(headers.authorization, body);
             User.findOne({ username: body.username })
             .then(async user => {
-                console.log(user);
                 if(!user.watchLater.includes(params.animeId)) {
                    return User.findByIdAndUpdate(
                     { _id: user._id },
