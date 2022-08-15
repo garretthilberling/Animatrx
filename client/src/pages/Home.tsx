@@ -31,9 +31,22 @@ const Home = () => {
     }
   };
 
+  const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
+    if(e.currentTarget.value) {
+      setSearch([{
+        filter: "text",
+        by: e.currentTarget.value
+      }]);
+    } else {
+      setSearch([]);
+    }
+    setLoading(true);
+    console.log(search);
+  }
+
   useEffect(() => {
-    KitsuApi.getAllAnime(setApiData, setLoading, setError, offset);
-  }, [loading]);
+    KitsuApi.searchAnime(search, setApiData, setLoading, setError, offset);
+  }, [loading, search, offset]);
 
   // useEffect(() => {
   //     KitsuApi.searchAnime(search, setApiData, setLoading, setError);
@@ -55,6 +68,7 @@ const Home = () => {
               type="text"
               className="search-bar"
               placeholder="Search by name"
+              onChange={handleSearch}
             ></input>
             <button
               className="next-btn"

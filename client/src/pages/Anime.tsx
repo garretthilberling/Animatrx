@@ -16,6 +16,7 @@ const Anime = () => {
 
   useEffect(() => {
     KitsuApi.getSingleAnime(animeId, setApiData, setLoading, setError);
+    console.log(apiData);
   }, [loading]);
 
   useEffect(() => {
