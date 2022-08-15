@@ -6,7 +6,6 @@ export const addWatchLater = async (
   setError: React.Dispatch<React.SetStateAction<string>>,
   auth: string | null
 ) => {
-    console.log(JSON.stringify(user));
   let bearer;
   if (auth) {
     bearer = "Bearer " + auth;

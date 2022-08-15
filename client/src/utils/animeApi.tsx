@@ -41,7 +41,8 @@ class KitsuApi {
     params: parameter[],
     setOutput: React.Dispatch<React.SetStateAction<string>>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    setError: React.Dispatch<React.SetStateAction<string>>
+    setError: React.Dispatch<React.SetStateAction<string>>,
+    offset: number
   ) {
     let url = this.baseUrl + "anime?";
     for (let i = 0; i < params.length; i++) {
@@ -52,6 +53,8 @@ class KitsuApi {
         "%20"
       )}${next}`;
     }
+    url += `&page%5Blimit%5D=20&page%5Boffset%5D=${offset}`;
+
     console.log(url);
     fetch(url, this.getHeaders)
       .then((response) => {

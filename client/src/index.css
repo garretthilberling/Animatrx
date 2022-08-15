@@ -103,6 +103,10 @@ button {
   cursor: pointer;
 }
 
+input:focus {
+  outline: none;
+}
+
 .page-container {
   position: relative;
   min-height: 100vh;
@@ -357,7 +361,7 @@ button {
 }
 
 .star-selected {
-  color: #f5f762;
+  color: #FFD700;
 }
 
 .heart-selected {
