@@ -19,7 +19,7 @@ const Anime = () => {
   }, [loading]);
 
   useEffect(() => {
-    YtApi.ytReq(apiData?.attributes?.canonicalTitle);
+    // YtApi.ytReq(apiData?.attributes?.canonicalTitle);
     // .then((data) => {
     //   setVideo(data);
     //   data.json();

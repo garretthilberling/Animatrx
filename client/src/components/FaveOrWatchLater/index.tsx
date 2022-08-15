@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import authService from "../../utils/auth";
 import { getProfile } from "../../utils/userRoutes";
+import { addWatchLater } from "../../utils/animeRoutes";
 import {useParams} from "react-router-dom";
+import {usernameQuery} from "../../utils/types";
 
 const FaveOrWatchLater = () => {
   const [starSelected, setStarSelected] = useState(false);
@@ -11,11 +13,15 @@ const FaveOrWatchLater = () => {
   const [error, setError] = useState("");
 
   const username = authService.getProfile().data.username;
+  const authToken = authService.getToken();
   const animeId = useParams().animeId;
+
+  const handleStarSelect = () => {
+    addWatchLater(animeId, username, setError, authToken);
+  }
 
   useEffect(() => {
     getProfile(username, setLoading, setError, setData);
-    console.log(data.watchLater);
     if(data) {
         if(data.watchLater.includes(animeId)) {
             setStarSelected(true);
@@ -24,12 +30,12 @@ const FaveOrWatchLater = () => {
             setHeartSelected(true);
         }
     }
-  }, [loading]);
+  }, [loading, starSelected, heartSelected]);
 
   return (
     <div className="fave-watch-later">
       <button
-        onClick={() => setStarSelected((prev) => !prev)}
+        onClick={handleStarSelect}
         className="submit"
       >
         <i

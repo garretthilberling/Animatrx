@@ -3,18 +3,19 @@ const { User } = require("../models");
 const animeController = {
     addWatchLater({ params, body, headers }, res) {
         if(headers.authorization) {
-            User.findOne({ _id: body.userId })
+            User.findOne({ username: body.username })
             .then(async user => {
+                console.log(user);
                 if(!user.watchLater.includes(params.animeId)) {
                    return User.findByIdAndUpdate(
-                    { _id: body.userId },
+                    { _id: user._id },
                     { $push: { watchLater: params.animeId } },
                     { new: true }
                    );
                 } else {
                     // remove from watchLater
                     return User.findByIdAndUpdate(
-                        { _id: body.userId },
+                        { _id: user._id },
                         { $pull: { watchLater: params.animeId } },
                         { new: true }
                        ); 
@@ -29,18 +30,18 @@ const animeController = {
 
     addFavorites({ params, body, headers }, res) {
         if(headers.authorization) {
-            User.findOne({ _id: body.userId })
+            User.findOne({ username: body.username })
             .then(async user => {
                 if(!user.favorites.includes(params.animeId)) {
                    return User.findByIdAndUpdate(
-                    { _id: body.userId },
+                    { _id: user._id },
                     { $push: { favorites: params.animeId } },
                     { new: true }
                    );
                 } else {
                     // remove from favorites
                     return User.findByIdAndUpdate(
-                        { _id: body.userId },
+                        { _id: user._id },
                         { $pull: { favorites: params.animeId } },
                         { new: true }
                        ); 

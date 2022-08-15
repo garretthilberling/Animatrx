@@ -23,6 +23,10 @@ export type userOutput = {
     }
 }
 
+export type usernameQuery = {
+    username: string
+}
+
 export type authService = {
     getProfile(): any 
     loggedIn(): boolean | void
