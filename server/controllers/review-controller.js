@@ -98,6 +98,7 @@ const reviewController = {
 
   upvote({ params, body, headers }, res) {
     if (headers.authorization) {
+      console.log(body.userId);
       let id = mongoose.Types.ObjectId(body.userId);
 
       const upvote = Review.findOne({ _id: params.reviewId }).then(

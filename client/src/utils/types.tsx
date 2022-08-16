@@ -27,6 +27,10 @@ export type usernameQuery = {
   username: string;
 };
 
+export type voteQuery = {
+  userId: string;
+};
+
 export type authService = {
   getProfile(): any;
   loggedIn(): boolean | void;

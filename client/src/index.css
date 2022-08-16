@@ -148,7 +148,7 @@ input:focus, textarea:focus, select:focus{
 }
 
 .font-logo:hover {
-  color: var(--off-white-100);
+  color: var(--deep-red-500);
 }
 
 .header {
@@ -174,7 +174,7 @@ input:focus, textarea:focus, select:focus{
 }
 
 .nav-btn:hover {
-  color: var(--off-white-100);
+  color: var(--deep-red-500);
 }
 
 .loading {
@@ -492,7 +492,7 @@ input:focus, textarea:focus, select:focus{
 }
 
 .profile-header {
-  color: var(--off-white-100);
+  color: var(--deep-red-500);
   font-family: "Inconsolata", monospace;
   font-weight: semibold;
 }
@@ -520,9 +520,10 @@ input:focus, textarea:focus, select:focus{
   margin-bottom: 3rem;
 }
 
-.review-container {
+.review-form-container {
   width: 200px;
-  margin: 2rem auto;
+  height: 200px;
+  margin: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -550,6 +551,53 @@ input:focus, textarea:focus, select:focus{
   );
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#170312", endColorstr="#026C7C", GradientType=1 );
+}
+
+.reviews-container {
+  display: flex;
+  overflow-x: scroll;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  position: relative;
+  width: 100%;
+}
+
+.review-container {
+  width: 200px;
+  height: 200px;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  padding: 2rem 1rem;
+  position: relative;
+  background: var(--soft-blue-500);
+  border-radius: .5rem;
+  overflow-y: scroll;
+
+  background: linear-gradient(
+    90deg,
+    var(--soft-blue-400) 47%,
+    var(--soft-blue-200) 100%
+  );
+
+  background: -moz-linear-gradient(
+    90deg,
+    var(--soft-blue-400) 47%,
+    var(--soft-blue-200) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    90deg,
+    var(--soft-blue-400) 47%,
+    var(--soft-blue-200) 100%
+  );
+}
+
+.thumbs-up {
+  color: var(--soft-blue-400);
+}
+
+.thumbs-down {
+  color: var(--deep-red-500);
 }
 
 

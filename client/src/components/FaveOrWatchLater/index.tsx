@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import authService from "../../utils/auth";
 import { getProfile } from "../../utils/userRoutes";
 import { addWatchLater, addFavorites } from "../../utils/animeRoutes";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { usernameQuery } from "../../utils/types";
 
 const FaveOrWatchLater = () => {
