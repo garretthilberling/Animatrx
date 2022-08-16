@@ -42,18 +42,18 @@ const FaveOrWatchLater = () => {
 
   return (
     <div className="fave-watch-later">
-      <button onClick={handleStarSelect} className="submit">
+      <button onClick={handleStarSelect} className="fave-wl-btn">
         <i
-          className={`fa-solid fa-star ${starSelected && "star-selected"}`}
+          className={`fa-solid fa-star unselected ${starSelected && "star-selected"}`}
         ></i>{" "}
         Save to Watchlist
       </button>
       <button
         onClick={handleHeartSelect}
-        className="submit"
+        className="fave-wl-btn"
       >
         <i
-          className={`fa-solid fa-heart ${heartSelected && "heart-selected"}`}
+          className={`fa-solid fa-heart unselected ${heartSelected && "heart-selected"}`}
         ></i>{" "}
         Add to Favorites
       </button>

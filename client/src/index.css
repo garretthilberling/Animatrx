@@ -46,23 +46,23 @@
 
   background: linear-gradient(
     90deg,
-    var(--dark-500) 0%,
-    var(--deep-red-500) 47%,
-    var(--deep-red-100) 100%
+    var(--soft-blue-500) 0%,
+    var(--soft-blue-200) 47%,
+    var(--soft-blue-100) 100%
   );
 
   background: -moz-linear-gradient(
     90deg,
-    var(--dark-500) 0%,
-    var(--deep-red-500) 47%,
-    var(--deep-red-100) 100%
+    var(--soft-blue-500) 0%,
+    var(--soft-blue-200) 47%,
+    var(--soft-blue-100) 100%
   );
 
   background: -webkit-linear-gradient(
     90deg,
-    var(--dark-500) 0%,
-    var(--deep-red-500) 47%,
-    var(--deep-red-100) 100%
+    var(--soft-blue-500) 0%,
+    var(--soft-blue-200) 47%,
+    var(--soft-blue-100) 100%
   );
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#170312", endColorstr="#026C7C", GradientType=1 );
@@ -328,6 +328,7 @@ input:focus, textarea:focus, select:focus{
 }
 
 .single-description-card {
+  color: var(--off-white-100);
   position: relative;
   padding: 1rem;
   background: var(--soft-blue-500);
@@ -335,20 +336,20 @@ input:focus, textarea:focus, select:focus{
 
   background: linear-gradient(
     90deg,
-    var(--soft-blue-100) 47%,
-    var(--soft-blue-400) 100%
+    var(--deep-red-500) 47%,
+    var(--deep-red-500) 100%
   );
 
   background: -moz-linear-gradient(
     90deg,
-    var(--soft-blue-100) 47%,
-    var(--soft-blue-400) 100%
+    var(--deep-red-500) 47%,
+    var(--deep-red-500) 100%
   );
 
   background: -webkit-linear-gradient(
     90deg,
-    var(--soft-blue-100) 47%,
-    var(--soft-blue-400) 100%
+    var(--deep-red-500) 47%,
+    var(--deep-red-500) 100%
   );
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#170312", endColorstr="#026C7C", GradientType=1 );
@@ -369,12 +370,32 @@ input:focus, textarea:focus, select:focus{
   margin-right: 1rem;
 }
 
+.unselected {
+  color: rgb(150, 147, 147);
+  transition: all;
+  transition-duration: 300ms;
+}
+
 .star-selected {
   color: #FFD700;
 }
 
+
 .heart-selected {
   color: var(--deep-red-300);
+}
+
+.fave-wl-btn {
+  width: fit-content;
+  padding: .25rem;
+  border-radius: .25rem;
+  transition: all;
+  transition-duration: 300ms;
+}
+
+.fave-wl-btn:hover {
+  /* font-size: 1.05rem; */
+  color: var(--soft-blue-100);
 }
 
 .login-signup-container {
@@ -395,20 +416,20 @@ input:focus, textarea:focus, select:focus{
 
   background: linear-gradient(
     90deg,
-    var(--soft-blue-100) 47%,
-    var(--soft-blue-400) 100%
+    #6d0f09 7%,
+    var(--deep-red-500) 100%
   );
 
   background: -moz-linear-gradient(
     90deg,
-    var(--soft-blue-100) 47%,
-    var(--soft-blue-400) 100%
+    #6d0f09 7%,
+    var(--deep-red-500) 100%
   );
 
   background: -webkit-linear-gradient(
     90deg,
-    var(--soft-blue-100) 47%,
-    var(--soft-blue-400) 100%
+    #6d0f09 7%,
+    var(--deep-red-500) 100%
   );
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#170312", endColorstr="#026C7C", GradientType=1 );
@@ -436,7 +457,7 @@ input:focus, textarea:focus, select:focus{
 }
 
 .login-signup-flex a {
-  color: var(--soft-blue-500);
+  color: var(--off-white-100);
   margin-bottom: 1rem;
   text-decoration: none;
   transition: all;
@@ -444,14 +465,14 @@ input:focus, textarea:focus, select:focus{
 }
 
 .login-signup-flex a:hover {
-  color: var(--soft-blue-400);
+  color: var(--soft-blue-200);
 }
 
 .submit {
   all: unset;
   cursor: pointer;
-  color: var(--off-white-100);
-  background: var(--soft-blue-500);
+  color: #5c0f09;
+  background: var(--soft-blue-300);
   width: fit-content;
   margin: 0 auto;
   padding: .25rem;
@@ -461,7 +482,8 @@ input:focus, textarea:focus, select:focus{
 }
 
 .submit:hover {
-  background: var(--soft-blue-300);
+  background: var(--soft-blue-200);
+  color: #6d0f09;
 }
 
 .profile-container {
