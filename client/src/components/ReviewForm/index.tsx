@@ -36,7 +36,7 @@ const ReviewForm = ({ animeId }: any) => {
   }
 
   return (
-    <div className="review-container">
+    <div className="review-form-container">
       <form onSubmit={handleFormSubmit} className="login-signup-flex">
         <input
           className="form-input-margin"

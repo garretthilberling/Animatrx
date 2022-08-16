@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { getReviews } from "../../utils/reviewRoutes";
+import UpvoteDownvote from "../UpvoteDownvote";
 
 const Reviews = ({ animeId }: any) => {
   const [data, setData] = useState<any>("");
@@ -9,6 +10,7 @@ const Reviews = ({ animeId }: any) => {
 
   useEffect(() => {
     getReviews(animeId, setLoading, setError, setData);
+    console.log(data);
   }, [loading]);
 
   return (
@@ -18,8 +20,9 @@ const Reviews = ({ animeId }: any) => {
       ) : (
         <div>
           {data.map((review:any) => (
-            <div>
-              <div><h3>{review.title}</h3><span>{review.rating}</span></div>
+            <div className="review-container">
+              <UpvoteDownvote review={review} />
+              <div><h3>{review.title}</h3><span>{review.rating}/10</span></div>
               <div>{review.body}</div>
             </div>
           ))}

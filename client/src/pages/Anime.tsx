@@ -70,7 +70,7 @@ const Anime = () => {
                           <></>
                         )}
                       </div>
-                      <div>
+                      <div className="reviews-container">
                         <>
                           {AuthService.loggedIn() && (
                             <ReviewForm animeId={animeId} />
