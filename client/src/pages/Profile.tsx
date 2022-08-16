@@ -61,13 +61,13 @@ const Profile = () => {
 
   return (
     <div className="page">
-      {loading || wlLoading || faveLoading ? (
+      {loading ? (
         <div>Loading...</div>
       ) : (
         <div className="profile-container">
           <h2 className="profile-header">Favorites</h2>
           <div className="content-container">
-            {faveData.length &&
+            {faveData.length ? (
               faveData.map((fave: any, index: number) => (
                 <div className="content-card" key={index}>
                   <Link to={`/${fave.attributes.slug}/${fave.id}`}>
@@ -87,11 +87,13 @@ const Profile = () => {
                     </div>
                   </Link>
                 </div>
-              ))}
+              ))) : (
+                <div>None yet!</div>
+              )}
           </div>
           <h2 className="profile-header">Watch Later</h2>
           <div className="content-container">
-            {wlData.length &&
+            {wlData.length ? (
               wlData.map((wl: any, index: number) => (
                 <div className="content-card" key={index}>
                   <Link to={`/${wl.attributes.slug}/${wl.id}`}>
@@ -111,7 +113,9 @@ const Profile = () => {
                     </div>
                   </Link>
                 </div>
-              ))}
+              ))) : (
+                <div>None yet!</div>
+              )}
           </div>
         </div>
       )}
