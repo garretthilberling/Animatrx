@@ -465,14 +465,14 @@ input:focus, textarea:focus, select:focus{
 }
 
 .login-signup-flex a:hover {
-  color: var(--soft-blue-200);
+  color: var(--soft-blue-100);
 }
 
 .submit {
   all: unset;
   cursor: pointer;
   color: #5c0f09;
-  background: var(--soft-blue-300);
+  background: var(--off-white-100);
   width: fit-content;
   margin: 0 auto;
   padding: .25rem;
@@ -482,7 +482,7 @@ input:focus, textarea:focus, select:focus{
 }
 
 .submit:hover {
-  background: var(--soft-blue-200);
+  background: var(--soft-blue-100);
   color: #6d0f09;
 }
 
