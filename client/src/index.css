@@ -46,23 +46,23 @@
 
   background: linear-gradient(
     90deg,
-    var(--dark-500) 0%,
-    var(--deep-red-500) 47%,
-    var(--deep-red-100) 100%
+    var(--soft-blue-500) 0%,
+    var(--soft-blue-200) 47%,
+    var(--soft-blue-100) 100%
   );
 
   background: -moz-linear-gradient(
     90deg,
-    var(--dark-500) 0%,
-    var(--deep-red-500) 47%,
-    var(--deep-red-100) 100%
+    var(--soft-blue-500) 0%,
+    var(--soft-blue-200) 47%,
+    var(--soft-blue-100) 100%
   );
 
   background: -webkit-linear-gradient(
     90deg,
-    var(--dark-500) 0%,
-    var(--deep-red-500) 47%,
-    var(--deep-red-100) 100%
+    var(--soft-blue-500) 0%,
+    var(--soft-blue-200) 47%,
+    var(--soft-blue-100) 100%
   );
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#170312", endColorstr="#026C7C", GradientType=1 );
@@ -111,7 +111,7 @@ button {
   cursor: pointer;
 }
 
-input:focus {
+input:focus, textarea:focus, select:focus{
   outline: none;
 }
 
@@ -230,7 +230,6 @@ input:focus {
 .anime-img {
   width: 900px;
   border-radius: 0 0 10px 10px;
-  border-radius: 0 0 10px 10px;
   border-width: 0 .25rem .25rem .25rem;
   border-style: solid;
   border-color: var(--off-white-100);
@@ -317,6 +316,11 @@ input:focus {
   max-width: 400px;
   border-radius: .5rem;
   margin-left: 1rem;
+  border-width: .15rem;
+  border-style: solid;
+  border-color: var(--soft-blue-100);
+  /* box-shadow: 0 25px 50px -12px rgba(254, 254, 254, 0.4); */
+
 }
 
 .single-description-container {
@@ -324,6 +328,7 @@ input:focus {
 }
 
 .single-description-card {
+  color: var(--off-white-100);
   position: relative;
   padding: 1rem;
   background: var(--soft-blue-500);
@@ -331,20 +336,20 @@ input:focus {
 
   background: linear-gradient(
     90deg,
-    var(--soft-blue-100) 47%,
-    var(--soft-blue-400) 100%
+    var(--deep-red-500) 47%,
+    var(--deep-red-500) 100%
   );
 
   background: -moz-linear-gradient(
     90deg,
-    var(--soft-blue-100) 47%,
-    var(--soft-blue-400) 100%
+    var(--deep-red-500) 47%,
+    var(--deep-red-500) 100%
   );
 
   background: -webkit-linear-gradient(
     90deg,
-    var(--soft-blue-100) 47%,
-    var(--soft-blue-400) 100%
+    var(--deep-red-500) 47%,
+    var(--deep-red-500) 100%
   );
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#170312", endColorstr="#026C7C", GradientType=1 );
@@ -365,12 +370,32 @@ input:focus {
   margin-right: 1rem;
 }
 
+.unselected {
+  color: rgb(150, 147, 147);
+  transition: all;
+  transition-duration: 300ms;
+}
+
 .star-selected {
   color: #FFD700;
 }
 
+
 .heart-selected {
   color: var(--deep-red-300);
+}
+
+.fave-wl-btn {
+  width: fit-content;
+  padding: .25rem;
+  border-radius: .25rem;
+  transition: all;
+  transition-duration: 300ms;
+}
+
+.fave-wl-btn:hover {
+  /* font-size: 1.05rem; */
+  color: var(--soft-blue-100);
 }
 
 .login-signup-container {
@@ -391,20 +416,20 @@ input:focus {
 
   background: linear-gradient(
     90deg,
-    var(--soft-blue-100) 47%,
-    var(--soft-blue-400) 100%
+    #6d0f09 7%,
+    var(--deep-red-500) 100%
   );
 
   background: -moz-linear-gradient(
     90deg,
-    var(--soft-blue-100) 47%,
-    var(--soft-blue-400) 100%
+    #6d0f09 7%,
+    var(--deep-red-500) 100%
   );
 
   background: -webkit-linear-gradient(
     90deg,
-    var(--soft-blue-100) 47%,
-    var(--soft-blue-400) 100%
+    #6d0f09 7%,
+    var(--deep-red-500) 100%
   );
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#170312", endColorstr="#026C7C", GradientType=1 );
@@ -420,7 +445,7 @@ input:focus {
   flex-direction: column;
 }
 
-.login-signup-flex input {
+.login-signup-flex input, textarea {
   margin-bottom: .75rem;
   padding: .25rem;
   border-radius: .25rem;
@@ -432,7 +457,7 @@ input:focus {
 }
 
 .login-signup-flex a {
-  color: var(--soft-blue-500);
+  color: var(--off-white-100);
   margin-bottom: 1rem;
   text-decoration: none;
   transition: all;
@@ -440,14 +465,14 @@ input:focus {
 }
 
 .login-signup-flex a:hover {
-  color: var(--soft-blue-400);
+  color: var(--soft-blue-200);
 }
 
 .submit {
   all: unset;
   cursor: pointer;
-  color: var(--off-white-100);
-  background: var(--soft-blue-500);
+  color: #5c0f09;
+  background: var(--soft-blue-300);
   width: fit-content;
   margin: 0 auto;
   padding: .25rem;
@@ -457,7 +482,8 @@ input:focus {
 }
 
 .submit:hover {
-  background: var(--soft-blue-300);
+  background: var(--soft-blue-200);
+  color: #6d0f09;
 }
 
 .profile-container {
@@ -492,6 +518,38 @@ input:focus {
 
 .page {
   margin-bottom: 3rem;
+}
+
+.review-container {
+  width: 200px;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  background: var(--soft-blue-500);
+  border-radius: .5rem;
+
+  background: linear-gradient(
+    90deg,
+    var(--soft-blue-400) 47%,
+    var(--soft-blue-200) 100%
+  );
+
+  background: -moz-linear-gradient(
+    90deg,
+    var(--soft-blue-400) 47%,
+    var(--soft-blue-200) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    90deg,
+    var(--soft-blue-400) 47%,
+    var(--soft-blue-200) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#170312", endColorstr="#026C7C", GradientType=1 );
 }
 
 

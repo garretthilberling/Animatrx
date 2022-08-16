@@ -51,3 +51,11 @@ export type ytSearch = {
   params: params;
   withCredentials: boolean;
 };
+
+export type reviewInput = {
+  userId: string;
+  animeId: string;
+  title: string;
+  body: string;
+  rating: number;
+};

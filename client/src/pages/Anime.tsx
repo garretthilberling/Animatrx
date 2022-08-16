@@ -6,6 +6,8 @@ import YtApi from "../utils/ytSearchApi";
 import { youtubeVideo } from "../utils/types";
 import AuthService from "../utils/auth";
 import FaveOrWatchLater from "../components/FaveOrWatchLater";
+import ReviewForm from "../components/ReviewForm";
+import Reviews from "../components/Reviews";
 
 const Anime = () => {
   const [apiData, setApiData] = useState<any>("");
@@ -29,7 +31,7 @@ const Anime = () => {
     // console.log(video);
   }, [apiData]);
   return (
-    <div className="">
+    <div className="body">
       {loading ? (
         <div className="loading">Loading...</div>
       ) : (
@@ -67,6 +69,14 @@ const Anime = () => {
                         ) : (
                           <></>
                         )}
+                      </div>
+                      <div>
+                        <>
+                          {AuthService.loggedIn() && (
+                            <ReviewForm animeId={animeId} />
+                          )}
+                          <Reviews animeId={animeId} />
+                        </>
                       </div>
                     </div>
                   </div>
