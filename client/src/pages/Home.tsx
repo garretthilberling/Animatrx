@@ -23,6 +23,7 @@ const Home = () => {
   };
 
   const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
+    setOffset(0);
     if(e.currentTarget.value) {
       setSearch([{
         filter: "text",
