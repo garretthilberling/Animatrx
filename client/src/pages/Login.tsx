@@ -36,7 +36,6 @@ const Login = () => {
     } catch (e) {
         console.error(e);
     }
-
   }
 
   return (

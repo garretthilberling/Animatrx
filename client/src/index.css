@@ -111,7 +111,7 @@ button {
   cursor: pointer;
 }
 
-input:focus {
+input:focus, textarea:focus, select:focus{
   outline: none;
 }
 
@@ -230,7 +230,6 @@ input:focus {
 .anime-img {
   width: 900px;
   border-radius: 0 0 10px 10px;
-  border-radius: 0 0 10px 10px;
   border-width: 0 .25rem .25rem .25rem;
   border-style: solid;
   border-color: var(--off-white-100);
@@ -317,6 +316,11 @@ input:focus {
   max-width: 400px;
   border-radius: .5rem;
   margin-left: 1rem;
+  border-width: .15rem;
+  border-style: solid;
+  border-color: var(--soft-blue-100);
+  /* box-shadow: 0 25px 50px -12px rgba(254, 254, 254, 0.4); */
+
 }
 
 .single-description-container {
@@ -420,7 +424,7 @@ input:focus {
   flex-direction: column;
 }
 
-.login-signup-flex input {
+.login-signup-flex input, textarea {
   margin-bottom: .75rem;
   padding: .25rem;
   border-radius: .25rem;
@@ -492,6 +496,38 @@ input:focus {
 
 .page {
   margin-bottom: 3rem;
+}
+
+.review-container {
+  width: 200px;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  background: var(--soft-blue-500);
+  border-radius: .5rem;
+
+  background: linear-gradient(
+    90deg,
+    var(--soft-blue-400) 47%,
+    var(--soft-blue-200) 100%
+  );
+
+  background: -moz-linear-gradient(
+    90deg,
+    var(--soft-blue-400) 47%,
+    var(--soft-blue-200) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    90deg,
+    var(--soft-blue-400) 47%,
+    var(--soft-blue-200) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#170312", endColorstr="#026C7C", GradientType=1 );
 }
 
 

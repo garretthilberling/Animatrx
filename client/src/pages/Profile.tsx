@@ -35,11 +35,9 @@ const Profile = () => {
         setError
       );
     });
-    // console.log(wlData);
   };
 
   const handleQueryFavorites = (data: any) => {
-    // console.log(data.favorites);
     data.favorites.forEach((id: any) => {
       KitsuApi.getMultipleAnimeById(
         id,
@@ -51,16 +49,14 @@ const Profile = () => {
         setError
       );
     });
-    // console.log(faveUsed);
   };
 
   useEffect(() => {
     getProfile(username, setLoading, setError, setData);
-    if (data && !loading) {
+    if (data) {
       if (wlLoading) handleQueryWatchLater(data);
       if (faveLoading) handleQueryFavorites(data);
     }
-    // console.log(data);
   }, [loading]);
 
   return (
