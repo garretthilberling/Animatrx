@@ -10,7 +10,7 @@ class KitsuApi {
     },
   };
 
-  getAllAnime(
+  async getAllAnime(
     setOutput: React.Dispatch<React.SetStateAction<object[]>>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
     setError: React.Dispatch<React.SetStateAction<string>>,
@@ -19,7 +19,7 @@ class KitsuApi {
     console.log(offset);
     let url =
       this.baseUrl + `/anime?page%5Blimit%5D=20&page%5Boffset%5D=${offset}`;
-    fetch(url, this.getHeaders)
+    await fetch(url, this.getHeaders)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -38,7 +38,7 @@ class KitsuApi {
       });
   }
 
-  searchAnime(
+  async searchAnime(
     params: parameter[],
     setOutput: React.Dispatch<React.SetStateAction<string>>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
@@ -57,7 +57,7 @@ class KitsuApi {
     url += `&page%5Blimit%5D=20&page%5Boffset%5D=${offset}`;
     console.log(url);
 
-    fetch(url, this.getHeaders)
+    await fetch(url, this.getHeaders)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -76,14 +76,14 @@ class KitsuApi {
       });
   }
 
-  getSingleAnime(
+  async getSingleAnime(
     id: string,
     setOutput: React.Dispatch<React.SetStateAction<string>>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
     setError: React.Dispatch<React.SetStateAction<string>>
   ) {
     let url = this.baseUrl + `anime/${id}`;
-    fetch(url, this.getHeaders)
+    await fetch(url, this.getHeaders)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -102,7 +102,7 @@ class KitsuApi {
       });
   }
 
-  getMultipleAnimeById(
+  async getMultipleAnimeById(
     id: string,
     idArr: string[],
     setOutput: React.Dispatch<React.SetStateAction<string[]>>,
@@ -112,7 +112,7 @@ class KitsuApi {
     setError: React.Dispatch<React.SetStateAction<string>>
   ) {
     let url = this.baseUrl + `anime/${id}`;
-    fetch(url, this.getHeaders)
+    await fetch(url, this.getHeaders)
       .then((response) => {
         if (response.ok) {
           return response.json();
