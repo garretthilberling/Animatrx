@@ -29,10 +29,15 @@ const Anime = () => {
     apiRatingsCountArr.map((rating) => (totalReviews += Number(rating)));
 
     let newRatings = 0;
-    if(localReviews) localReviews.map((review) => newRatings += review.rating);
+    if(localReviews.length > 0) localReviews.map((review) => newRatings += review.rating);
     let localAvg = newRatings / localReviews.length
     // newAvg = (avg1 * size1 + avg2 * size2) / (size1 + size2)
-    let adjustedRating = (localAvg * localReviews.length + averageRating * totalReviews) / (localReviews.length + totalReviews);
+    let adjustedRating;
+    if(localReviews.length > 0) {
+      adjustedRating = (localAvg * localReviews.length + averageRating * totalReviews) / (localReviews.length + totalReviews);
+    } else {
+      adjustedRating = averageRating;
+    }
 
     return Math.round(adjustedRating * 10) / 100;
   };
