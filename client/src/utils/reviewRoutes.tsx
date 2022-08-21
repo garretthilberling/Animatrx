@@ -4,7 +4,8 @@ export const getReviews = async (
   animeId: string | undefined,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   setError: React.Dispatch<React.SetStateAction<string>>,
-  setOutput: React.Dispatch<React.SetStateAction<any>>
+  setOutput: React.Dispatch<React.SetStateAction<any>>,
+  sendOutput: React.Dispatch<React.SetStateAction<any>>
 ) => {
     await fetch(`/api/anime/${animeId}/reviews`, {
         method: "GET",
@@ -21,6 +22,7 @@ export const getReviews = async (
         })
         .then((data) => {
           setOutput(data);
+          sendOutput(data);
           setLoading(false);
         })
         .catch((err) => {

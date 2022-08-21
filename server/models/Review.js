@@ -1,8 +1,8 @@
 const { Schema, model } = require("mongoose");
 
 const ReviewSchema = new Schema({
-  userId: {
-    type: Schema.Types.ObjectId,
+  username: {
+    type: String,
     required: true,
   },
   animeId: {

@@ -14,22 +14,43 @@ const Anime = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [video, setVideo] = useState({});
+  const [reviews, setReviews] = useState<any>([]);
   let animeId = useParams().animeId as string;
+
+  const getRating = (
+    averageRating: number,
+    apiRatings: any[],
+    localReviews: any[]
+  ) => {
+    let apiRatingsCountArr = Object.values(apiRatings);
+    let totalReviews = 0;
+    totalReviews += localReviews.length;
+
+    apiRatingsCountArr.map((rating) => (totalReviews += Number(rating)));
+
+    let newRatings = 0;
+    if(localReviews) localReviews.map((review) => newRatings += review.rating);
+    let localAvg = newRatings / localReviews.length
+    // newAvg = (avg1 * size1 + avg2 * size2) / (size1 + size2)
+    let adjustedRating = (localAvg * localReviews.length + averageRating * totalReviews) / (localReviews.length + totalReviews);
+
+    return Math.round(adjustedRating * 10) / 100;
+  };
 
   useEffect(() => {
     KitsuApi.getSingleAnime(animeId, setApiData, setLoading, setError);
     console.log(apiData);
   }, [loading]);
 
-  useEffect(() => {
-    // YtApi.ytReq(apiData?.attributes?.canonicalTitle);
-    // .then((data) => {
-    //   setVideo(data);
-    //   data.json();
-    // })
-    // .catch((error) => console.log(error));
-    // console.log(video);
-  }, [apiData]);
+  // useEffect(() => {
+  //   // YtApi.ytReq(apiData?.attributes?.canonicalTitle);
+  //   // .then((data) => {
+  //   //   setVideo(data);
+  //   //   data.json();
+  //   // })
+  //   // .catch((error) => console.log(error));
+  //   // console.log(video);
+  // }, [apiData]);
   return (
     <div className="body">
       {loading ? (
@@ -54,9 +75,14 @@ const Anime = () => {
                         </h3>
                         <h4>{apiData?.attributes?.titles?.en_jp}</h4>
                         <span>
-                          {Math.round(apiData?.attributes?.averageRating * 10) /
-                            100}
-                          /10
+                          <>
+                            {getRating(
+                              apiData?.attributes?.averageRating,
+                              apiData?.attributes?.ratingFrequencies,
+                              reviews
+                            )}
+                            /10
+                          </>
                         </span>
                         {AuthService.loggedIn() && <FaveOrWatchLater />}
                         <p>{apiData?.attributes?.description}</p>
@@ -71,14 +97,14 @@ const Anime = () => {
                         )}
                       </div>
                     </div>
-                      <div className="reviews-container">
-                        <>
-                          {AuthService.loggedIn() && (
-                            <ReviewForm animeId={animeId} />
-                          )}
-                          <Reviews animeId={animeId} />
-                        </>
-                      </div>
+                    <div className="reviews-container">
+                      <>
+                        {AuthService.loggedIn() && (
+                          <ReviewForm animeId={animeId} />
+                        )}
+                        <Reviews animeId={animeId} setReviews={setReviews} />
+                      </>
+                    </div>
                   </div>
                 </div>
               )}

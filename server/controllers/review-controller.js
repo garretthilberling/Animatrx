@@ -51,7 +51,7 @@ const reviewController = {
   addReview(req, res) {
     if (req.headers.authorization) {
       Review.create({
-        userId: req.body.userId,
+        username: req.body.username,
         animeId: req.params.animeId,
         title: req.body.title,
         body: req.body.body,
@@ -98,7 +98,6 @@ const reviewController = {
 
   upvote({ params, body, headers }, res) {
     if (headers.authorization) {
-      console.log(body.userId);
       let id = mongoose.Types.ObjectId(body.userId);
 
       const upvote = Review.findOne({ _id: params.reviewId }).then(
