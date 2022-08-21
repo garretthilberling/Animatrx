@@ -3,7 +3,6 @@ const { User } = require("../models");
 const animeController = {
     addWatchLater({ params, body, headers }, res) {
         if(headers.authorization) {
-            console.log(headers.authorization, body);
             User.findOne({ username: body.username })
             .then(async user => {
               let date = new Date;

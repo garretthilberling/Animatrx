@@ -125,7 +125,7 @@ class KitsuApi {
           setUsed((prev) => [...prev, data.data.id]);
           if (dataArr.findIndex((i) => i.id === id) === dataArr.length - 1) {
             // sort so most recently added appear first
-            setOutput((prev) => [...prev].sort((a,b) => {
+            setOutput((prev) => [...prev, { data: data.data, dateAdded: dateAdded }].sort((a,b) => {
               return Number(b.dateAdded) - Number(a.dateAdded)
             }));
             setLoading(false);
