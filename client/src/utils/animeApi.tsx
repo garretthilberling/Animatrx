@@ -123,14 +123,12 @@ class KitsuApi {
       .then((data) => {
         if (!used.includes(data.data.id)) {
           setUsed((prev) => [...prev, data.data.id]);
+          setOutput((prev) => [...prev, { data: data.data, dateAdded: dateAdded }].sort((a,b) => {
+            return Number(b.dateAdded) - Number(a.dateAdded)
+          }));
           if (dataArr.findIndex((i) => i.id === id) === dataArr.length - 1) {
             // sort so most recently added appear first
-            setOutput((prev) => [...prev, { data: data.data, dateAdded: dateAdded }].sort((a,b) => {
-              return Number(b.dateAdded) - Number(a.dateAdded)
-            }));
             setLoading(false);
-          } else {
-            setOutput((prev) => [...prev, { data: data.data, dateAdded: dateAdded }]);
           }
         }
       })
