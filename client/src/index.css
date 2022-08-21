@@ -42,7 +42,7 @@
   --dark-400: #2f4c3d;
   --dark-500: #0A100D;
 
-  background: var(--dark-500);
+  background: var(--soft-blue-100);
 
   background: linear-gradient(
     90deg,
