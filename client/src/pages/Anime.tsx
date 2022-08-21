@@ -12,9 +12,12 @@ import Reviews from "../components/Reviews";
 const Anime = () => {
   const [apiData, setApiData] = useState<any>("");
   const [loading, setLoading] = useState(true);
+  const [apiReviewsLoading, setApiReviewsLoading] = useState(true);
   const [error, setError] = useState("");
   const [video, setVideo] = useState({});
   const [reviews, setReviews] = useState<any>([]);
+  const [apiReviewsUrl, setApiReviewsUrl] = useState("");
+  const [apiReviews, setApiReviews] = useState<any>([]);
   let animeId = useParams().animeId as string;
 
   const getRating = (
@@ -43,9 +46,13 @@ const Anime = () => {
   };
 
   useEffect(() => {
-    KitsuApi.getSingleAnime(animeId, setApiData, setLoading, setError);
-    console.log(apiData);
+    KitsuApi.getSingleAnime(animeId, setApiData, setApiReviewsUrl, setLoading, setError);
+    // console.log(apiData);
   }, [loading]);
+  useEffect(() => {
+    if(apiReviewsUrl) KitsuApi.getAnimeReviews(apiReviewsUrl, setApiReviews, setApiReviewsLoading, setError);
+
+  }, [apiReviewsUrl, apiReviewsLoading]);
 
   // useEffect(() => {
   //   // YtApi.ytReq(apiData?.attributes?.canonicalTitle);
@@ -107,7 +114,7 @@ const Anime = () => {
                         {AuthService.loggedIn() && (
                           <ReviewForm animeId={animeId} />
                         )}
-                        <Reviews animeId={animeId} setReviews={setReviews} />
+                        <Reviews animeId={animeId} setReviews={setReviews} apiReviews={apiReviews} />
                       </>
                     </div>
                   </div>
