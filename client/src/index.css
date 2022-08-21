@@ -529,28 +529,28 @@ input:focus, textarea:focus, select:focus{
   align-items: center;
   text-align: center;
   padding: 2rem 1rem;
-  background: var(--soft-blue-500);
+  background: var(--deep-red-500);
   border-radius: .5rem;
 
   background: linear-gradient(
     90deg,
-    var(--soft-blue-400) 47%,
-    var(--soft-blue-200) 100%
+    #6d0f09 47%,
+    var(--deep-red-500) 100%
   );
 
   background: -moz-linear-gradient(
     90deg,
-    var(--soft-blue-400) 47%,
-    var(--soft-blue-200) 100%
+    #6d0f09 47%,
+    var(--deep-red-500) 100%
   );
 
   background: -webkit-linear-gradient(
     90deg,
-    var(--soft-blue-400) 47%,
-    var(--soft-blue-200) 100%
+    #6d0f09 47%,
+    var(--deep-red-500) 100%
   );
 
-  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#170312", endColorstr="#026C7C", GradientType=1 );
+  /* filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#170312", endColorstr="#026C7C", GradientType=1 ); */
 }
 
 .reviews-container {
@@ -565,39 +565,67 @@ input:focus, textarea:focus, select:focus{
 .review-container {
   width: 200px;
   height: 200px;
+  color: var(--off-white-100);
   margin-right: 2rem;
   margin-top: 2rem;
   padding: 2rem 1rem;
   position: relative;
-  background: var(--soft-blue-500);
+  background: var(--deep-red-500);
   border-radius: .5rem;
   overflow-y: scroll;
 
   background: linear-gradient(
     90deg,
-    var(--soft-blue-400) 47%,
-    var(--soft-blue-200) 100%
+    #6d0f09 47%,
+    var(--deep-red-500) 100%
   );
 
   background: -moz-linear-gradient(
     90deg,
-    var(--soft-blue-400) 47%,
-    var(--soft-blue-200) 100%
+    #6d0f09 47%,
+    var(--deep-red-500) 100%
   );
 
   background: -webkit-linear-gradient(
     90deg,
-    var(--soft-blue-400) 47%,
-    var(--soft-blue-200) 100%
+    #6d0f09 47%,
+    var(--deep-red-500) 100%
   );
+}
+
+.upvote-downvote-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+}
+
+.upvote-downvote-container button {
+  padding: 0 .25rem;
+}
+
+.upvote-downvote-container button:hover i {
+  color: var(--soft-blue-100);
 }
 
 .thumbs-up {
   color: var(--soft-blue-400);
+  transition: all;
+  transition-duration: 300ms;
+}
+
+.thumbs-up:hover {
+  color: var(--soft-blue-300);
 }
 
 .thumbs-down {
-  color: var(--deep-red-500);
+  color: var(--deep-red-200);
+  transition: all;
+  transition-duration: 300ms;
+}
+
+.thumbs-down:hover {
+  color: var(--deep-red-100);
 }
 
 

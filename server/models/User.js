@@ -26,8 +26,16 @@ const UserSchema = new Schema(
       data: Buffer,
       required: false
     },
-    watchLater: [{ type: String }],
-    favorites: [{ type: String }],
+    watchLater: [{ 
+      _id: false,
+      id: { type: String, required: false },
+      dateAdded: { type: Number, required: false }
+     }],
+    favorites: [{ 
+      _id: false,
+      id: { type: String, required: false },
+      dateAdded: { type: Number, required: false }
+     }],
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   },
   {

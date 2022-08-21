@@ -1,4 +1,4 @@
-import { parameter } from "./types";
+import { parameter, faveWlData } from "./types";
 
 class KitsuApi {
   baseUrl: string = "https://kitsu.io/api/edge/";
@@ -104,8 +104,9 @@ class KitsuApi {
 
   async getMultipleAnimeById(
     id: string,
-    idArr: string[],
-    setOutput: React.Dispatch<React.SetStateAction<string[]>>,
+    dateAdded: number,
+    dataArr: any[],
+    setOutput: React.Dispatch<React.SetStateAction<faveWlData[]>>,
     used: string[],
     setUsed: React.Dispatch<React.SetStateAction<string[]>>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
@@ -120,18 +121,22 @@ class KitsuApi {
         throw response;
       })
       .then((data) => {
-        console.log(used);
-        if(!used.includes(data.data.id)) {
-          setUsed(prev => [...prev, data.data.id]);
-          setOutput((prev) => [...prev, data.data]);
+        if (!used.includes(data.data.id)) {
+          setUsed((prev) => [...prev, data.data.id]);
+          if (dataArr.findIndex((i) => i.id === id) === dataArr.length - 1) {
+            // sort so most recently added appear first
+            setOutput((prev) => [...prev].sort((a,b) => {
+              return Number(b.dateAdded) - Number(a.dateAdded)
+            }));
+            setLoading(false);
+          } else {
+            setOutput((prev) => [...prev, { data: data.data, dateAdded: dateAdded }]);
+          }
         }
       })
       .catch((error) => {
         console.error(error);
         setError(error);
-      })
-      .finally(() => {
-        if (idArr.indexOf(id) === idArr.length - 1) setLoading(false);
       });
   }
 }

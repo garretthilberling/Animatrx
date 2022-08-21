@@ -1,7 +1,7 @@
 import { userOutput, usernameQuery, authService } from "./types";
 
 export const addWatchLater = async (
-  animeTitle: string | undefined,
+  animeId: string | undefined,
   user: usernameQuery | undefined,
   setError: React.Dispatch<React.SetStateAction<string>>,
   auth: string | null
@@ -10,7 +10,8 @@ export const addWatchLater = async (
   if (auth) {
     bearer = "Bearer " + auth;
   } else bearer = "";
-  await fetch(`/api/anime/${animeTitle}/watchLater`, {
+  console.log(bearer, animeId);
+  await fetch(`/api/anime/${animeId}/watchLater`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -36,7 +37,7 @@ export const addWatchLater = async (
 };
 
 export const addFavorites = async (
-    animeTitle: string | undefined,
+    animeId: string | undefined,
     user: usernameQuery | undefined,
     setError: React.Dispatch<React.SetStateAction<string>>,
     auth: string | null
@@ -45,7 +46,7 @@ export const addFavorites = async (
     if (auth) {
       bearer = "Bearer " + auth;
     } else bearer = "";
-    await fetch(`/api/anime/${animeTitle}/favorites`, {
+    await fetch(`/api/anime/${animeId}/favorites`, {
       method: "POST",
       credentials: "include",
       headers: {

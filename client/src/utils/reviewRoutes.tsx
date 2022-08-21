@@ -35,7 +35,10 @@ export const getReview = async (
   animeId: string | undefined,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   setError: React.Dispatch<React.SetStateAction<string>>,
-  setOutput: React.Dispatch<React.SetStateAction<any>>
+  setOutput: React.Dispatch<React.SetStateAction<any>>,
+  setThumbsUpSelected: React.Dispatch<React.SetStateAction<boolean>>,
+  setThumbsDownSelected: React.Dispatch<React.SetStateAction<boolean>>,
+  user: voteQuery
 ) => {
     await fetch(`http://${url}/api/anime/${animeId}/reviews/${reviewId}`, {
         method: "GET",
@@ -52,6 +55,12 @@ export const getReview = async (
         })
         .then((data) => {
           setOutput(data);
+          if (data.upvotes.includes(user.userId)) {
+            setThumbsUpSelected(true);
+          }
+          if (data.downvotes.includes(user.userId)) {
+            setThumbsDownSelected(true);
+          }
           setLoading(false);
         })
         .catch((err) => {
