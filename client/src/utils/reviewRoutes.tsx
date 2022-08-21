@@ -57,10 +57,11 @@ export const getReview = async (
         })
         .then((data) => {
           setOutput(data);
-          if (data.upvotes.includes(user.userId)) {
+          if (data.upvotes.includes(data.upvotes.find((uv:any) => uv._id === user.userId))) {
             setThumbsUpSelected(true);
           }
-          if (data.downvotes.includes(user.userId)) {
+          console.log(data.downvotes);
+          if (data.downvotes.includes(data.downvotes.find((dv:any) => dv._id === user.userId))) {
             setThumbsDownSelected(true);
           }
           setLoading(false);

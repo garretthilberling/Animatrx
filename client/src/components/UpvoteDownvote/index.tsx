@@ -25,12 +25,12 @@ const UpvoteDownvote = ({ review }: any) => {
 
   const handleThumbsUpSelect = () => {
     upvoteReview(url, user, review._id, animeId, setError, auth);
-    setThumbsUpSelected(prev => !prev);
     if(!thumbsUpSelected) {
       setUpvotes((prev:number) => prev += 1);
     } else {
       setUpvotes((prev:number) => prev -= 1);
     }
+    setThumbsUpSelected(prev => !prev);
     if(thumbsDownSelected) {
       setDownvotes((prev:number) => prev -= 1);
       setThumbsDownSelected(prev => !prev);
@@ -39,12 +39,12 @@ const UpvoteDownvote = ({ review }: any) => {
 
   const handleThumbsDownSelect = () => {
     downvoteReview(url, user, review._id, animeId, setError, auth);
-    setThumbsDownSelected(prev => !prev);
     if(!thumbsDownSelected) {
       setDownvotes((prev:number) => prev += 1);
     } else {
       setDownvotes((prev:number) => prev -= 1);
     }
+    setThumbsDownSelected(prev => !prev);
     if(thumbsUpSelected) {
       setUpvotes((prev:number) => prev -= 1);
       setThumbsUpSelected(prev => !prev);
@@ -58,10 +58,10 @@ const UpvoteDownvote = ({ review }: any) => {
   return (
     <div className="upvote-downvote-container">
       <button onClick={handleThumbsUpSelect}>
-        {upvotes} <i className={`fa-regular fa-thumbs-up ${thumbsUpSelected ? 'thumbs-up' : ''}`}></i>
+        {upvotes} <i className={`fa-regular fa-thumbs-up ${thumbsUpSelected ? 'thumbs-up' : 'thumbs-up-down-unselected'}`}></i>
       </button>
       <button onClick={handleThumbsDownSelect}>
-        {downvotes} <i className={`fa-regular fa-thumbs-down ${thumbsDownSelected ? 'thumbs-down' : ''}`}></i>
+        {downvotes} <i className={`fa-regular fa-thumbs-down ${thumbsDownSelected ? 'thumbs-down' : 'thumbs-up-down-unselected'}`}></i>
       </button>
     </div>
   );

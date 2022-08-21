@@ -77,6 +77,7 @@ class KitsuApi {
   async getSingleAnime(
     id: string,
     setOutput: React.Dispatch<React.SetStateAction<string>>,
+    setUrl: React.Dispatch<React.SetStateAction<string>>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
     setError: React.Dispatch<React.SetStateAction<string>>
   ) {
@@ -90,6 +91,8 @@ class KitsuApi {
       })
       .then((data) => {
         setOutput(data.data);
+        setUrl(data.data.relationships.reviews.links.related);
+        // console.log(data.data.relationships.reviews.links);
       })
       .catch((error) => {
         console.error(error);
@@ -98,6 +101,62 @@ class KitsuApi {
       .finally(() => {
         setLoading(false);
       });
+  }
+
+  async getAnimeReviews(
+    url: string,
+    setOutput: React.Dispatch<React.SetStateAction<string>>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    setError: React.Dispatch<React.SetStateAction<string>>
+  ) {
+    console.log(url);
+    await fetch(url, this.getHeaders)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw response;
+    })
+    .then((data) => {
+      console.log(data.links);
+      this.sendReviewUrl(
+        data.links.first,
+        setOutput,
+        setLoading,
+        setError
+      )
+    })
+    .catch((error) => {
+      console.error(error);
+      setError(error);
+    });
+  }
+
+  async sendReviewUrl(
+    url: string,
+    setOutput: React.Dispatch<React.SetStateAction<string>>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    setError: React.Dispatch<React.SetStateAction<string>>
+  ) {
+    await fetch(url, this.getHeaders)
+    .then((response) => {
+      console.log(response);
+      if (response.ok) {
+        return response.json();
+      }
+      throw response;
+    })
+    .then((data) => {
+      console.log(data);
+      // setOutput(data.data);
+    })
+    .catch((error) => {
+      console.error(error);
+      setError(error);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
   }
 
   async getMultipleAnimeById(

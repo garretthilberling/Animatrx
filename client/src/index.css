@@ -617,6 +617,14 @@ input:focus, textarea:focus, select:focus{
 }
 
 .upvote-downvote-container button:hover i {
+}
+
+.thumbs-up-down-unselected {
+  transition: all;
+  transition-duration: 300ms;
+}
+
+.thumbs-up-down-unselected:hover {
   color: var(--soft-blue-100);
 }
 
@@ -627,7 +635,7 @@ input:focus, textarea:focus, select:focus{
 }
 
 .thumbs-up:hover {
-  color: var(--soft-blue-300);
+  color: var(--soft-blue-300) !important;
 }
 
 .thumbs-down {
@@ -637,7 +645,7 @@ input:focus, textarea:focus, select:focus{
 }
 
 .thumbs-down:hover {
-  color: var(--deep-red-100);
+  color: var(--deep-red-100) !important;
 }
 
 
