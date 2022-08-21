@@ -62,7 +62,7 @@ export type ytSearch = {
 };
 
 export type reviewInput = {
-  userId: string;
+  username: string;
   animeId: string;
   title: string;
   body: string;

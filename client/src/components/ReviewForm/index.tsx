@@ -4,10 +4,10 @@ import { reviewInput } from "../../utils/types";
 import AuthService from "../../utils/auth";
 
 const ReviewForm = ({ animeId }: any) => {
-  let userId = AuthService.getProfile().data._id;
+  let username = AuthService.getProfile().data.username;
   let auth = AuthService.getToken();
   const [formState, setFormState] = useState<reviewInput>({
-    userId: userId,
+    username: username,
     animeId: animeId,
     title: '',
     body: '',

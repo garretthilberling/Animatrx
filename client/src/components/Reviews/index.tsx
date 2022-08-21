@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { getReviews } from "../../utils/reviewRoutes";
+import { Link } from "react-router-dom";
 import UpvoteDownvote from "../UpvoteDownvote";
 
 const Reviews = ({ animeId }: any) => {
@@ -22,6 +23,7 @@ const Reviews = ({ animeId }: any) => {
           {data.map((review:any) => (
             <div className="review-container">
               <UpvoteDownvote review={review} />
+              <Link to={`/profile/${review.username}`}>{review.username}</Link>
               <div><h3>{review.title}</h3><span>{review.rating}/10</span></div>
               <div>{review.body}</div>
             </div>

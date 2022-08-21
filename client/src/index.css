@@ -593,6 +593,18 @@ input:focus, textarea:focus, select:focus{
   );
 }
 
+.review-container a {
+  all: unset;
+  color: #10d7f6;
+  transition: all;
+  transition-duration: 300ms;
+  cursor: pointer;
+}
+
+.review-container a:hover {
+  color: #71e4f5;
+}
+
 .upvote-downvote-container {
   position: absolute;
   top: 0;

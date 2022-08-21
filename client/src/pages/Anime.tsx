@@ -21,15 +21,15 @@ const Anime = () => {
     console.log(apiData);
   }, [loading]);
 
-  useEffect(() => {
-    // YtApi.ytReq(apiData?.attributes?.canonicalTitle);
-    // .then((data) => {
-    //   setVideo(data);
-    //   data.json();
-    // })
-    // .catch((error) => console.log(error));
-    // console.log(video);
-  }, [apiData]);
+  // useEffect(() => {
+  //   // YtApi.ytReq(apiData?.attributes?.canonicalTitle);
+  //   // .then((data) => {
+  //   //   setVideo(data);
+  //   //   data.json();
+  //   // })
+  //   // .catch((error) => console.log(error));
+  //   // console.log(video);
+  // }, [apiData]);
   return (
     <div className="body">
       {loading ? (
