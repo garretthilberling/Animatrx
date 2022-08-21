@@ -31,10 +31,10 @@ const FaveOrWatchLater = () => {
   useEffect(() => {
     getProfile(username.username, setLoading, setError, setData);
     if (data) {
-      if (data.watchLater.includes(animeId)) {
+      if (data.watchLater.includes(data.watchLater.find((wl: any) => wl.id === animeId))) {
         setStarSelected(true);
       }
-      if (data.favorites.includes(animeId)) {
+      if (data.favorites.includes(data.favorites.find((fave: any) => fave.id === animeId))) {
         setHeartSelected(true);
       }
     }

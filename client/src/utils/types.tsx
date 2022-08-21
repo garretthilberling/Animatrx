@@ -3,6 +3,11 @@ export type parameter = {
   by: string;
 };
 
+export type faveWlData = {
+  data: any;
+  dateAdded: number;
+}
+
 export type newUser = {
   username: string;
   email: string;

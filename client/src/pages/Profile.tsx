@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getProfile } from "../utils/userRoutes";
 import { useParams } from "react-router-dom";
 import KitsuApi from "../utils/animeApi";
-import { parameter } from "../utils/types";
+import { parameter, faveWlData } from "../utils/types";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
@@ -24,30 +24,37 @@ const Profile = () => {
   const [faveUsed, setFaveUsed] = useState<string[]>([]);
 
   const handleQueryWatchLater = (data: any) => {
-    data.watchLater.forEach((id: any) => {
-      KitsuApi.getMultipleAnimeById(
-        id,
-        data.watchLater,
-        setWlData,
-        wlUsed,
-        setWlUsed,
-        setWlLoading,
-        setError
-      );
+    console.log(data.watchLater)
+    data.watchLater.forEach((wl: any) => {
+      if(wl.id) {
+        KitsuApi.getMultipleAnimeById(
+          wl.id,
+          wl.dateAdded,
+          data.watchLater,
+          setWlData,
+          wlUsed,
+          setWlUsed,
+          setWlLoading,
+          setError
+        );
+      }
     });
   };
 
   const handleQueryFavorites = (data: any) => {
-    data.favorites.forEach((id: any) => {
-      KitsuApi.getMultipleAnimeById(
-        id,
-        data.favorites,
-        setFaveData,
-        faveUsed,
-        setFaveUsed,
-        setFaveLoading,
-        setError
-      );
+    data.favorites.forEach((fave: any) => {
+      if(fave.id) {
+        KitsuApi.getMultipleAnimeById(
+          fave.id,
+          fave.dateAdded,
+          data.favorites,
+          setFaveData,
+          faveUsed,
+          setFaveUsed,
+          setFaveLoading,
+          setError
+        );
+      }
     });
   };
 
@@ -61,7 +68,7 @@ const Profile = () => {
 
   return (
     <div className="page">
-      {loading ? (
+      {loading || (wlData && wlLoading) || (faveData && faveLoading) ? (
         <div>Loading...</div>
       ) : (
         <div className="profile-container">
@@ -70,19 +77,19 @@ const Profile = () => {
             {faveData.length ? (
               faveData.map((fave: any, index: number) => (
                 <div className="content-card" key={index}>
-                  <Link to={`/${fave.attributes.slug}/${fave.id}`}>
+                  <Link to={`/${fave.data.attributes.slug}/${fave.data.id}`}>
                     <img
                       src={
-                        fave.attributes.coverImage.tiny
-                          ? fave.attributes.coverImage.tiny
-                          : fave.attributes.coverImage.small
+                        fave.data.attributes.coverImage.tiny
+                          ? fave.data.attributes.coverImage.tiny
+                          : fave.data.attributes.coverImage.small
                       }
                       className="anime-img anime-img-top-border"
                       alt="cover-art"
                     ></img>
                     <div className="anime-title-wrapper">
                       <p className="anime-title">
-                        {fave?.attributes?.canonicalTitle}
+                        {fave.data?.attributes?.canonicalTitle}
                       </p>
                     </div>
                   </Link>
@@ -96,19 +103,19 @@ const Profile = () => {
             {wlData.length ? (
               wlData.map((wl: any, index: number) => (
                 <div className="content-card" key={index}>
-                  <Link to={`/${wl.attributes.slug}/${wl.id}`}>
+                  <Link to={`/${wl.data.attributes.slug}/${wl.data.id}`}>
                     <img
                       src={
-                        wl.attributes.coverImage.tiny
-                          ? wl.attributes.coverImage.tiny
-                          : wl.attributes.coverImage.small
+                        wl.data.attributes.coverImage.tiny
+                          ? wl.data.attributes.coverImage.tiny
+                          : wl.data.attributes.coverImage.small
                       }
                       className="anime-img anime-img-top-border"
                       alt="cover-art"
                     ></img>
                     <div className="anime-title-wrapper">
                       <p className="anime-title">
-                        {wl?.attributes?.canonicalTitle}
+                        {wl.data?.attributes?.canonicalTitle}
                       </p>
                     </div>
                   </Link>

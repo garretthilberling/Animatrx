@@ -8,7 +8,9 @@ import AuthService from "../../utils/auth";
 
 const UpvoteDownvote = ({ review }: any) => {
   const [thumbsUpSelected, setThumbsUpSelected] = useState(false);
+  const [upvotes, setUpvotes] = useState(review.upvotes.length);
   const [thumbsDownSelected, setThumbsDownSelected] = useState(false);
+  const [downvotes, setDownvotes] = useState(review.downvotes.length);
   const [data, setData] = useState<any>("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -24,33 +26,43 @@ const UpvoteDownvote = ({ review }: any) => {
   const handleThumbsUpSelect = () => {
     upvoteReview(url, user, review._id, animeId, setError, auth);
     setThumbsUpSelected(prev => !prev);
+    if(!thumbsUpSelected) {
+      setUpvotes((prev:number) => prev += 1);
+    } else {
+      setUpvotes((prev:number) => prev -= 1);
+    }
+    if(thumbsDownSelected) {
+      setDownvotes((prev:number) => prev -= 1);
+      setThumbsDownSelected(prev => !prev);
+    }
   };
 
   const handleThumbsDownSelect = () => {
     downvoteReview(url, user, review._id, animeId, setError, auth);
     setThumbsDownSelected(prev => !prev);
+    if(!thumbsDownSelected) {
+      setDownvotes((prev:number) => prev += 1);
+    } else {
+      setDownvotes((prev:number) => prev -= 1);
+    }
+    if(thumbsUpSelected) {
+      setUpvotes((prev:number) => prev -= 1);
+      setThumbsUpSelected(prev => !prev);
+    }
   };
 
   useEffect(() => {
-    getReview(url, review._id, animeId, setLoading, setError, setData);
-    console.log(data);
-    if (data) {
-      if (data.upvotes.includes(user.userId)) {
-        setThumbsUpSelected(true);
-      }
-      if (data.downvotes.includes(user.userId)) {
-        setThumbsDownSelected(true);
-      }
-    }
-  }, [loading, thumbsUpSelected, thumbsDownSelected]);
+    getReview(url, review._id, animeId, setLoading, setError, setData, setThumbsUpSelected, setThumbsDownSelected, user);
+    console.log(thumbsUpSelected);
+  }, [loading, thumbsUpSelected, thumbsDownSelected, upvotes, downvotes]);
 
   return (
-    <div>
+    <div className="upvote-downvote-container">
       <button onClick={handleThumbsUpSelect}>
-        {review.upvotes.length} <i className={`fa-regular fa-thumbs-up ${thumbsUpSelected && 'thumbs-up'}`}></i>
+        {upvotes} <i className={`fa-regular fa-thumbs-up ${thumbsUpSelected ? 'thumbs-up' : ''}`}></i>
       </button>
       <button onClick={handleThumbsDownSelect}>
-        {review.downvotes.length} <i className={`fa-regular fa-thumbs-down ${thumbsDownSelected && 'thumbs-down'}`}></i>
+        {downvotes} <i className={`fa-regular fa-thumbs-down ${thumbsDownSelected ? 'thumbs-down' : ''}`}></i>
       </button>
     </div>
   );
