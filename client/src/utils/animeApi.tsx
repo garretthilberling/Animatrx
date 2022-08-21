@@ -16,7 +16,6 @@ class KitsuApi {
     setError: React.Dispatch<React.SetStateAction<string>>,
     offset: number
   ) {
-    console.log(offset);
     let url =
       this.baseUrl + `/anime?page%5Blimit%5D=20&page%5Boffset%5D=${offset}`;
     await fetch(url, this.getHeaders)
@@ -55,7 +54,6 @@ class KitsuApi {
       )}${next}`;
     }
     url += `&page%5Blimit%5D=20&page%5Boffset%5D=${offset}`;
-    console.log(url);
 
     await fetch(url, this.getHeaders)
       .then((response) => {

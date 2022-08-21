@@ -53,7 +53,6 @@ const UpvoteDownvote = ({ review }: any) => {
 
   useEffect(() => {
     getReview(url, review._id, animeId, setLoading, setError, setData, setThumbsUpSelected, setThumbsDownSelected, user);
-    console.log(thumbsUpSelected);
   }, [loading, thumbsUpSelected, thumbsDownSelected, upvotes, downvotes]);
 
   return (

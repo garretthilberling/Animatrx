@@ -6,7 +6,6 @@ export const signup = async (
   setOutput: React.Dispatch<React.SetStateAction<userOutput>>,
   auth: authService
 ) => {
-  // console.log(Object(input));
   await fetch(`/api/signup`, {
     method: "POST",
     headers: {
