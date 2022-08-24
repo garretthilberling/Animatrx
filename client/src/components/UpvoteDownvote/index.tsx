@@ -28,13 +28,13 @@ const UpvoteDownvote = ({ review }: any) => {
     if(!thumbsUpSelected) {
       setUpvotes((prev:number) => prev += 1);
     } else {
-      setUpvotes((prev:number) => prev -= 1);
+      if(upvotes > 0) setUpvotes((prev:number) => prev -= 1);
     }
-    setThumbsUpSelected(prev => !prev);
     if(thumbsDownSelected) {
-      setDownvotes((prev:number) => prev -= 1);
+      if(downvotes > 0) setDownvotes((prev:number) => prev -= 1);
       setThumbsDownSelected(prev => !prev);
     }
+    setThumbsUpSelected(prev => !prev);
   };
 
   const handleThumbsDownSelect = () => {
@@ -42,13 +42,13 @@ const UpvoteDownvote = ({ review }: any) => {
     if(!thumbsDownSelected) {
       setDownvotes((prev:number) => prev += 1);
     } else {
-      setDownvotes((prev:number) => prev -= 1);
+      if(downvotes > 0) setDownvotes((prev:number) => prev -= 1);
     }
-    setThumbsDownSelected(prev => !prev);
     if(thumbsUpSelected) {
-      setUpvotes((prev:number) => prev -= 1);
+      if(upvotes > 0) setUpvotes((prev:number) => prev -= 1);
       setThumbsUpSelected(prev => !prev);
     }
+    setThumbsDownSelected(prev => !prev);
   };
 
   useEffect(() => {
