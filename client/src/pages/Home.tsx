@@ -24,26 +24,37 @@ const Home = () => {
 
   const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
     setOffset(0);
-    if(e.currentTarget.value) {
-      setSearch([{
-        filter: "text",
-        by: e.currentTarget.value
-      }]);
+    setLoading(true);
+
+    if (e.currentTarget.value) {
+      setSearch([
+        {
+          filter: "text",
+          by: e.currentTarget.value,
+        },
+      ]);
     } else {
       setSearch([]);
     }
-    setLoading(true);
-  }
+  };
 
   useEffect(() => {
-    KitsuApi.searchAnime(search, setApiData, setLoading, setError, offset);
+    if (search) {
+      setTimeout(() => {
+        KitsuApi.searchAnime(search, setApiData, setLoading, setError, offset);
+      }, 1000); // only sends request when user stops typing
+    } else {
+      KitsuApi.searchAnime(search, setApiData, setLoading, setError, offset);
+    }
   }, [loading, search, offset]);
 
   return (
     <div className="">
       <div className="page-container">
         <div className="anime-border">
-          <div className={`btns-container ${loading && 'btns-container-bottom'}`}>
+          <div
+            className={`btns-container ${loading && "btns-container-bottom"}`}
+          >
             <button
               className="prev-btn"
               type="submit"
@@ -69,16 +80,24 @@ const Home = () => {
             <div className="loading">Loading...</div>
           ) : (
             apiData.map((anime: any, index: number) => (
-              <div key={index}>
+              <div className="" key={index}>
                 {anime?.attributes?.coverImage?.tiny && (
-                  <div className={`anime-container ${index !== 0 && 'anime-container-top-border'}`}>
+                  <div
+                    className={`anime-container ${
+                      index !== 0 && "anime-container-top-border"
+                    }`}
+                  >
                     <Link to={`/${anime.attributes.slug}/${anime.id}`}>
                       <img
                         src={
-                          anime.attributes.coverImage.tiny ? anime.attributes.coverImage.tiny : anime.attributes.coverImage.small
+                          anime.attributes.coverImage.tiny
+                            ? anime.attributes.coverImage.tiny
+                            : anime.attributes.coverImage.small
                         }
                         alt="cover-img"
-                        className={`anime-img ${index !== 0 && 'anime-img-top-border'}`}
+                        className={`anime-img ${
+                          index !== 0 && "anime-img-top-border"
+                        }`}
                       ></img>
                       <div className="anime-title-wrapper">
                         <p className="anime-title">
